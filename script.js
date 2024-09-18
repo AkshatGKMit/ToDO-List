@@ -1,3 +1,3 @@
 "use strict";
 
-import { body } from "./ui.js";
+import { body } from "./components/index.js";

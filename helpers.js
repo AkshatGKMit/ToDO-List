@@ -1,13 +1,11 @@
-import { addButtonElem, modal } from "./ui.js";
-
 export const setStyles = function (styles, element) {
 	Object.assign(element.style, styles);
 };
 
-export const showModal = function () {
+export const showModal = function (modal) {
 	setStyles({ display: "block" }, modal);
 };
 
-export const hideModal = function () {
+export const hideModal = function (modal) {
 	setStyles({ display: "none" }, modal);
 };
