@@ -1,4 +1,4 @@
-import { setStyles } from "./helpers.js";
+import { hideModal, setStyles, showModal } from "./helpers.js";
 import { AddBtn } from "./icons.js";
 import * as style from "./style.js";
 
@@ -19,14 +19,11 @@ setStyles(
 	headerTag
 );
 
-const modals = document.createElement("div");
+export const modal = document.createElement("div");
 const barrier = document.createElement("div");
 setStyles(style.barrierStyle, barrier);
 
-barrier.onclick = function () {
-	setStyles({ display: "none" }, modals);
-	setStyles({ display: "block" }, addButtonElem);
-};
+barrier.onclick = hideModal;
 
 const addTaskDialogBox = document.createElement("div");
 {
@@ -146,6 +143,7 @@ const addTaskDialogBox = document.createElement("div");
 				},
 				cancelBtn
 			);
+			cancelBtn.onclick = hideModal;
 			addTaskBtns.appendChild(cancelBtn);
 		}
 		{
@@ -164,23 +162,22 @@ const addTaskDialogBox = document.createElement("div");
 	}
 }
 
-modals.appendChild(barrier);
-modals.append(addTaskDialogBox);
+modal.appendChild(barrier);
+modal.append(addTaskDialogBox);
 
-const addButtonElem = document.createElement("button");
+export const addButtonElem = document.createElement("button");
 addButtonElem.innerHTML = AddBtn;
 setStyles(style.floatingButtonStyle, addButtonElem);
 
 addButtonElem.onclick = function (ev) {
-	setStyles({ scale: 0.95, display: "none" }, this);
-	setStyles({ display: "block" }, modals);
+	showModal();
 	const scaleTO = setTimeout(() => {
 		setStyles({ scale: 1 }, this);
 	}, 60);
 };
 
 body.appendChild(headerTag);
-body.append(modals);
+body.append(modal);
 body.appendChild(addButtonElem);
 
 export { body, headerTag };
