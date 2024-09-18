@@ -1,5 +1,6 @@
 import { setStyles } from "./helpers.js";
 import { AddBtn } from "./icons.js";
+import * as style from "./style.js";
 
 const body = document.body;
 body.style.backgroundColor = "#00ffaa";
@@ -20,19 +21,7 @@ setStyles(
 
 const modals = document.createElement("div");
 const barrier = document.createElement("div");
-setStyles(
-	{
-		position: "absolute",
-		top: 0,
-		right: 0,
-		bottom: 0,
-		left: 0,
-		backgroundColor: "#333",
-		opacity: 0.5,
-		zIndex: 2,
-	},
-	barrier
-);
+setStyles(style.barrierStyle, barrier);
 
 barrier.onclick = function () {
 	setStyles({ display: "none" }, modals);
@@ -41,24 +30,7 @@ barrier.onclick = function () {
 
 const addTaskDialogBox = document.createElement("div");
 {
-	setStyles(
-		{
-			position: "absolute",
-			zIndex: 3,
-			top: "50%",
-			left: "50%",
-			transform: "translate(-50%, -50%)",
-			height: "fit-content",
-			width: "fit-content",
-			padding: "1rem",
-			backgroundColor: "#fff",
-			borderRadius: "10px",
-			display: "flex",
-			flexDirection: "column",
-			gap: "0.75rem",
-		},
-		addTaskDialogBox
-	);
+	setStyles(style.addTaskDialogStyle, addTaskDialogBox);
 
 	{
 		const dialogHeading = document.createElement("h2");
@@ -95,41 +67,27 @@ const addTaskDialogBox = document.createElement("div");
 			taskNameInp.setAttribute("autocomplete", "true");
 			taskNameInp.setAttribute("required", "true");
 			taskNameInp.setAttribute("placeholder", "*required");
-			setStyles(
-				{
-					width: "100%",
-					padding: "2px",
-					minWidth: "15rem",
-				},
-				taskNameInp
-			);
+			setStyles(style.addTaskInputStyle, taskNameInp);
 			nameInpWrapper.appendChild(taskNameInp);
 		}
 
 		inputList.appendChild(nameInpWrapper);
 	}
 	{
-		const nameInpWrapper = document.createElement("li");
+		const descriptionInpWrapper = document.createElement("li");
 		{
 			const taskNameLabel = document.createElement("label");
 			taskNameLabel.innerText = "Description";
-			nameInpWrapper.appendChild(taskNameLabel);
+			descriptionInpWrapper.appendChild(taskNameLabel);
 
 			const taskNameInp = document.createElement("textarea");
 			taskNameInp.setAttribute("rows", "5");
-			setStyles(
-				{
-					width: "100%",
-					padding: "2px",
-					minWidth: "15rem",
-				},
-				taskNameInp
-			);
-			nameInpWrapper.appendChild(taskNameInp);
+			setStyles(style.addTaskInputStyle, taskNameInp);
+			descriptionInpWrapper.appendChild(taskNameInp);
 			taskNameInp.setAttribute("placeholder", "(optional)");
 		}
 
-		inputList.appendChild(nameInpWrapper);
+		inputList.appendChild(descriptionInpWrapper);
 	}
 	addTaskDialogBox.appendChild(inputList);
 
@@ -148,12 +106,8 @@ const addTaskDialogBox = document.createElement("div");
 			cancelBtn.innerText = "Cancel";
 			setStyles(
 				{
-					border: "none",
-					borderRadius: "12px",
+					...style.addTaskDialogBtnsStyle,
 					backgroundColor: "black",
-					color: "white",
-					padding: "5px 10px",
-					fontSize: "1.2rem",
 				},
 				cancelBtn
 			);
@@ -164,12 +118,8 @@ const addTaskDialogBox = document.createElement("div");
 			addBtn.innerText = "Add";
 			setStyles(
 				{
-					border: "none",
-					borderRadius: "12px",
+					...style.addTaskDialogBtnsStyle,
 					backgroundColor: "orange",
-					color: "white",
-					padding: "5px 10px",
-					fontSize: "1.2rem",
 				},
 				addBtn
 			);
@@ -184,24 +134,7 @@ modals.append(addTaskDialogBox);
 
 const addButtonElem = document.createElement("button");
 addButtonElem.innerHTML = AddBtn;
-setStyles(
-	{
-		position: "fixed",
-		bottom: 0,
-		right: 0,
-		zIndex: 1,
-		margin: "1.5rem",
-		display: "block",
-		height: "3rem",
-		width: "3rem",
-		padding: "0.25rem",
-		border: 0,
-		borderRadius: "10px",
-		backgroundColor: "#ffff00",
-		boxShadow: "0px 0px 10px 0px #999",
-	},
-	addButtonElem
-);
+setStyles(style.floatingButtonStyle, addButtonElem);
 
 addButtonElem.onclick = function (ev) {
 	setStyles({ scale: 0.95, display: "none" }, this);
