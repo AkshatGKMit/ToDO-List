@@ -171,9 +171,20 @@ setStyles(style.floatingButtonStyle, addButtonElem);
 
 addButtonElem.onclick = function (ev) {
 	showModal();
+	setStyles({ scale: 0.95 }, this);
 	const scaleTO = setTimeout(() => {
 		setStyles({ scale: 1 }, this);
 	}, 60);
+};
+
+addButtonElem.onmouseover = function () {
+	setStyles(
+		{
+			...style.floatingButtonStyle,
+			cursor: "pointer",
+		},
+		this
+	);
 };
 
 body.appendChild(headerTag);
