@@ -51,7 +51,7 @@ const addTaskDialogBox = document.createElement("div");
 			listStyle: "none",
 			display: "flex",
 			flexDirection: "column",
-			gap: "0.5rem",
+			gap: "0.8rem",
 		},
 		inputList
 	);
@@ -72,6 +72,41 @@ const addTaskDialogBox = document.createElement("div");
 		}
 
 		inputList.appendChild(nameInpWrapper);
+	}
+	{
+		const deadlineInpWrapper = document.createElement("li");
+		setStyles(
+			{ display: "flex", flexDirection: "column", gap: "2px" },
+			deadlineInpWrapper
+		);
+		{
+			const taskDeadlineRow = document.createElement("div");
+			setStyles(
+				{ display: "flex", flexDirection: "row", gap: "0.5rem" },
+				taskDeadlineRow
+			);
+
+			const label = document.createElement("label");
+			label.innerText = "Deadline";
+			taskDeadlineRow.appendChild(label);
+
+			const checkbox = document.createElement("input");
+			checkbox.setAttribute("type", "checkbox");
+			taskDeadlineRow.appendChild(checkbox);
+
+			deadlineInpWrapper.appendChild(taskDeadlineRow);
+
+			const taskNameInp = document.createElement("input");
+			taskNameInp.setAttribute("type", "date");
+			taskNameInp.setAttribute("autocomplete", "true");
+			taskNameInp.setAttribute("required", "true");
+			taskNameInp.setAttribute("placeholder", "*required");
+			taskNameInp.setAttribute("disabled", checkbox.value);
+			setStyles(style.addTaskInputStyle, taskNameInp);
+			deadlineInpWrapper.appendChild(taskNameInp);
+		}
+
+		inputList.appendChild(deadlineInpWrapper);
 	}
 	{
 		const descriptionInpWrapper = document.createElement("li");
