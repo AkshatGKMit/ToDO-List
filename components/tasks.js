@@ -26,7 +26,8 @@ appendChildren(headCells, tbHeadRow);
 export const renderTable = function () {
 	tasksTb.innerHTML = "";
 
-	const tasks = window.tasks.getAll();
+	const tasksObj = window.tasks;
+	const tasks = tasksObj.getAll();
 
 	const taskElements = tasks.map((task, idx) => {
 		const newTask = document.createElement("tr");
@@ -58,6 +59,10 @@ export const renderTable = function () {
 		const delBtnElem = document.createElement("button");
 		delBtnElem.innerHTML = DeleteIcon;
 		setStyles(style.editDelIconStyle, delBtnElem);
+		delBtnElem.onclick = function () {
+			tasksObj.delete(idx);
+			renderTable();
+		};
 
 		appendChildren([editBtnElem], editCell);
 		appendChildren([delBtnElem], delCell);

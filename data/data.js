@@ -40,8 +40,11 @@ window.tasks = {
 	getAll: function () {
 		return this.list;
 	},
-	push: function (task) {
+	add: function (task) {
 		this.list.push(task);
+	},
+	delete: function (idx) {
+		this.list = this.list.filter((_, id) => id !== idx);
 	},
 };
 
