@@ -1,8 +1,7 @@
-import { setAttributes, setStyles } from "../helpers.js";
-import * as style from "../style.js";
-import { hideModal } from "../helpers.js";
+import { setAttributes, setStyles, hideModal } from "../helpers/helpers.js";
+import * as style from "../styles/style.js";
 import { modal } from "./modal.js";
-import { addTaskData } from "../data.js";
+import { addTaskData } from "../data/data.js";
 
 export const addTaskDialogBox = document.createElement("div");
 setStyles(style.addTaskDialogStyle, addTaskDialogBox);

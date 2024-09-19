@@ -1,4 +1,4 @@
-import { setStyles } from "../helpers.js";
+import { setStyles } from "../helpers/helpers.js";
 
 export const headerTag = document.createElement("header");
 const headingElem = document.createElement("h1");

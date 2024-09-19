@@ -1,5 +1,5 @@
-import { setStyles, hideModal } from "../helpers.js";
-import * as style from "../style.js";
+import { setStyles, hideModal } from "../helpers/helpers.js";
+import * as style from "../styles/style.js";
 import { addTaskDialogBox } from "./add_task_dialog.js";
 
 export const modal = document.createElement("div");

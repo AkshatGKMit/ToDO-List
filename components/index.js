@@ -1,6 +1,6 @@
-import * as style from "../style.js";
-import { setStyles, showModal } from "../helpers.js";
-import { AddBtn } from "../icons.js";
+import * as style from "../styles/style.js";
+import { setStyles, showModal } from "../helpers/helpers.js";
+import { AddBtn } from "../assets/icons.js";
 import { modal } from "./modal.js";
 import { headerTag } from "./header.js";
 

@@ -1,4 +1,4 @@
-import Task from "./task.js";
+import Task from "../models/task.js";
 
 export const tasks = {
 	list: [],
