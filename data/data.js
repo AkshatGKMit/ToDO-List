@@ -14,6 +14,7 @@ window.data = {
 	isDialogOpen: false,
 	toggleDialog: function () {
 		this.isDialogOpen = !this.isDialogOpen;
+		renderDialog()
 	},
 };
 

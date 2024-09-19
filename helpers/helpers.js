@@ -12,10 +12,15 @@ export const appendChildren = function (children, parent) {
 	});
 };
 
+export const renderElement = function (element, newContent) {
+	element.innerHTML = "";
+	element.appendChild(newContent);
+};
+
 export const showModal = function (modal) {
-	setStyles({ display: "block" }, modal);
+	appendChildren([modal], document.body);
 };
 
 export const hideModal = function (modal) {
-	setStyles({ display: "none" }, modal);
+	document.body.removeChild(modal);
 };

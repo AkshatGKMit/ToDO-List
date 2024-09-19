@@ -10,4 +10,3 @@ barrier.onclick = () => hideModal(modal);
 
 appendChildren([barrier, addTaskDialogBox], modal);
 
-appendChildren([modal], document.body);
