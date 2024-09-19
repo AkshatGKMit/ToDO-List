@@ -1,4 +1,4 @@
-import { setStyles, hideModal } from "../helpers/helpers.js";
+import { setStyles, hideModal, appendChildren } from "../helpers/helpers.js";
 import * as style from "../styles/style.js";
 import { addTaskDialogBox } from "./add_task_dialog.js";
 
@@ -8,7 +8,6 @@ setStyles(style.barrierStyle, barrier);
 
 barrier.onclick = () => hideModal(modal);
 
-modal.appendChild(barrier);
-modal.appendChild(addTaskDialogBox);
+appendChildren([barrier, addTaskDialogBox], modal);
 
-document.body.appendChild(modal);
+appendChildren([modal], document.body);

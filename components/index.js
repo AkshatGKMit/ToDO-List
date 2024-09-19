@@ -1,5 +1,5 @@
 import * as style from "../styles/style.js";
-import { setStyles, showModal } from "../helpers/helpers.js";
+import { appendChildren, setStyles, showModal } from "../helpers/helpers.js";
 import { AddBtn } from "../assets/icons.js";
 import { modal } from "./modal.js";
 import { headerTag } from "./header.js";
@@ -29,5 +29,4 @@ addButtonElem.onmouseover = function () {
 	);
 };
 
-body.appendChild(headerTag);
-body.appendChild(addButtonElem);
+appendChildren([headerTag, addButtonElem], body);

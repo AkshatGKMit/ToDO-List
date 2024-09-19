@@ -1,7 +1,11 @@
-import { setAttributes, setStyles, hideModal } from "../helpers/helpers.js";
+import {
+	setAttributes,
+	setStyles,
+	hideModal,
+	appendChildren,
+} from "../helpers/helpers.js";
 import * as style from "../styles/style.js";
 import { modal } from "./modal.js";
-// import { addTaskData } from "../data/data.js";
 
 export const addTaskDialogBox = document.createElement("div");
 setStyles(style.addTaskDialogStyle, addTaskDialogBox);
@@ -15,7 +19,6 @@ setStyles(
 	},
 	dialogHeading
 );
-addTaskDialogBox.appendChild(dialogHeading);
 
 const inputList = document.createElement("ul");
 setStyles(
@@ -32,7 +35,6 @@ const nameInpWrapper = document.createElement("li");
 
 const taskNameLabel = document.createElement("label");
 taskNameLabel.innerText = "Title";
-nameInpWrapper.appendChild(taskNameLabel);
 
 const taskNameInp = document.createElement("input");
 setAttributes(
@@ -46,9 +48,6 @@ setAttributes(
 setStyles(style.addTaskInputStyle, taskNameInp);
 
 taskNameInp.addEventListener("focus", (ev) => alert);
-nameInpWrapper.appendChild(taskNameInp);
-
-inputList.appendChild(nameInpWrapper);
 
 const deadlineInpWrapper = document.createElement("li");
 setStyles(
@@ -62,39 +61,31 @@ setStyles(
 	taskDeadlineRow
 );
 
-const label = document.createElement("label");
-label.innerText = "Deadline";
-taskDeadlineRow.appendChild(label);
+const deadlineLabel = document.createElement("label");
+deadlineLabel.innerText = "Deadline";
 
-const checkbox = document.createElement("input");
-setAttributes({ type: "checkbox" }, checkbox);
-checkbox.onchange = function (ev) {
+const deadlineCheckbox = document.createElement("input");
+setAttributes({ type: "checkbox" }, deadlineCheckbox);
+deadlineCheckbox.onchange = function (ev) {
 	window.addTaskData.toggleDeadline(ev.target.checked);
 	taskDeadlineInp.disabled = !ev.target.checked;
 };
-taskDeadlineRow.appendChild(checkbox);
-
-deadlineInpWrapper.appendChild(taskDeadlineRow);
 
 const taskDeadlineInp = document.createElement("input");
 setAttributes(
 	{
 		type: Date,
 		autocomplete: true,
-		disabled: checkbox.value,
+		disabled: deadlineCheckbox.value,
 	},
 	taskDeadlineInp
 );
 setStyles(style.addTaskInputStyle, taskDeadlineInp);
-deadlineInpWrapper.appendChild(taskDeadlineInp);
-
-inputList.appendChild(deadlineInpWrapper);
 
 const descriptionInpWrapper = document.createElement("li");
 
 const taskDescriptionLabel = document.createElement("label");
 taskDescriptionLabel.innerText = "Description";
-descriptionInpWrapper.appendChild(taskDescriptionLabel);
 
 const taskDescriptionInp = document.createElement("textarea");
 setAttributes(
@@ -105,11 +96,6 @@ setAttributes(
 	taskDescriptionInp
 );
 setStyles(style.addTaskInputStyle, taskDescriptionInp);
-descriptionInpWrapper.appendChild(taskDescriptionInp);
-
-inputList.appendChild(descriptionInpWrapper);
-
-addTaskDialogBox.appendChild(inputList);
 
 const addTaskBtns = document.createElement("div");
 setStyles(
@@ -131,7 +117,6 @@ setStyles(
 	cancelBtn
 );
 cancelBtn.onclick = () => hideModal(modal);
-addTaskBtns.appendChild(cancelBtn);
 
 const addBtn = document.createElement("button");
 addBtn.innerText = "Add";
@@ -148,6 +133,16 @@ addBtn.onclick = function () {
 	// window.addTaskData.dea;
 };
 
-addTaskBtns.appendChild(addBtn);
-
-addTaskDialogBox.appendChild(addTaskBtns);
+appendChildren([taskNameLabel, taskNameInp], nameInpWrapper);
+appendChildren([deadlineLabel, deadlineCheckbox], taskDeadlineRow);
+appendChildren([taskDeadlineRow, taskDeadlineInp], deadlineInpWrapper);
+appendChildren(
+	[taskDescriptionLabel, taskDescriptionInp],
+	descriptionInpWrapper
+);
+appendChildren(
+	[nameInpWrapper, deadlineInpWrapper, descriptionInpWrapper],
+	inputList
+);
+appendChildren([cancelBtn, addBtn], addTaskBtns);
+appendChildren([dialogHeading, inputList, addTaskBtns], addTaskDialogBox);
