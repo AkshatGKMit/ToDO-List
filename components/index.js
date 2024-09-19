@@ -3,6 +3,7 @@ import { appendChildren, setStyles, showModal } from "../helpers/helpers.js";
 import { AddBtn } from "../assets/icons.js";
 import { modal } from "./modal.js";
 import { headerTag } from "./header.js";
+import { tasksTb } from "./tasks.js";
 
 export const body = document.body;
 body.style.backgroundColor = "#00ffaa";
@@ -29,4 +30,4 @@ addButtonElem.onmouseover = function () {
 	);
 };
 
-appendChildren([headerTag, addButtonElem], body);
+appendChildren([headerTag, addButtonElem, tasksTb], body);

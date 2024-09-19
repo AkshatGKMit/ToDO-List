@@ -6,6 +6,7 @@ import {
 } from "../helpers/helpers.js";
 import * as style from "../styles/style.js";
 import { modal } from "./modal.js";
+import { renderTable } from "./tasks.js";
 
 export const addTaskDialogBox = document.createElement("div");
 setStyles(style.addTaskDialogStyle, addTaskDialogBox);
@@ -74,7 +75,7 @@ deadlineCheckbox.onchange = function (ev) {
 const taskDeadlineInp = document.createElement("input");
 setAttributes(
 	{
-		type: Date,
+		type: "date",
 		autocomplete: true,
 		disabled: deadlineCheckbox.value,
 	},
@@ -129,8 +130,14 @@ setStyles(
 );
 
 addBtn.onclick = function () {
-	window.addTaskData.setTitle(taskNameInp.value);
-	// window.addTaskData.dea;
+	const data = window.addTaskData;
+	data.setTitle(taskNameInp.value);
+	data.setDeadline(data.deadlineToggle ? taskDeadlineInp.value : "None");
+	data.setDescription(taskDescriptionInp.value);
+	data.appendTask();
+
+	renderTable();
+	hideModal(modal);
 };
 
 appendChildren([taskNameLabel, taskNameInp], nameInpWrapper);

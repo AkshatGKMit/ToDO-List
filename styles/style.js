@@ -54,3 +54,22 @@ export const barrierStyle = {
 	opacity: 0.5,
 	zIndex: 2,
 };
+
+export const tbStyle = {
+	margin: "1rem",
+	border: "1px solid black",
+	borderCollapse: "collapse",
+};
+
+export const tbCellStyle = {
+	border: "1px solid black",
+	padding: "0.1rem 0.5rem",
+};
+
+export const tbHeadStyle = {
+	...tbCellStyle,
+	textAlign: "center",
+	color: "white",
+	backgroundColor: "black",
+	padding: "0.1rem 1rem",
+};

@@ -1,7 +1,42 @@
 import Task from "../models/task.js";
 
 window.tasks = {
-	list: [],
+	list: [
+		{
+			idx: 1,
+			status: "Incomplete",
+			title: "Internal Response Agent",
+			date: "Sep-19-2024",
+			deadline: "Oct-31-2024",
+			description:
+				"Sit possimus quod quas laboriosam et sed corporis ipsa. Corrupti omnis qui ea dicta.",
+		},
+		{
+			idx: 2,
+			title: "Chief Branding Manager",
+			description: "Dolores impedit nostrum eum quod. Aut doloribus eum.",
+			status: "Incomplete",
+			deadline: "Feb-18-2025",
+			date: "Sep-19-2024",
+		},
+		{
+			idx: 3,
+			title: "Lead Accounts Analyst",
+			description:
+				"Facere harum est officia et et quia. Enim fugit qui voluptas est molestiae corrupti.",
+			status: "Incomplete",
+			deadline: "Aug-23-2025",
+			date: "Sep-19-2024",
+		},
+		{
+			idx: 4,
+			title: "District Operations Director",
+			description: "Cum recusandae et. Minima distinctio tempore.",
+			status: "Incomplete",
+			deadline: "Oct-05-2024",
+			date: "Sep-19-2024",
+		},
+	],
 	getAll: function () {
 		return this.list;
 	},
@@ -14,8 +49,9 @@ window.data = {
 	isDialogOpen: false,
 	toggleDialog: function () {
 		this.isDialogOpen = !this.isDialogOpen;
-		renderDialog()
+		renderDialog();
 	},
+	taskStatusEnum: ["Completed", "Incompleted", "Forgotten"],
 };
 
 window.addTaskData = {
@@ -41,7 +77,7 @@ window.addTaskData = {
 		this.description = "";
 	},
 	appendTask: function () {
-		tasks.push(
+		window.tasks.push(
 			new Task({
 				title: this.title,
 				deadline: this.deadlineToggle ? this.deadline : "none",

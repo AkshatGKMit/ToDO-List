@@ -1,8 +1,8 @@
 class Task {
-	constructor({ title, description, status, deadline }) {
+	constructor({ title, description, deadline }) {
 		this.title = title;
 		this.description = description;
-		this.status = status;
+		this.status = window.data.taskStatusEnum[1];
 		this.deadline = deadline;
 		this.date = Date.now();
 	}
