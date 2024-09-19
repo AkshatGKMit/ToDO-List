@@ -260,8 +260,19 @@ export const renderTable = function (obj) {
 	const emptyLabel = document.createElement("label");
 	emptyLabel.innerHTML = "No Task to display";
 
+	const loadingDiv = document.createElement("div");
+	setStyles(style.loaderDivStyle, loadingDiv);
+
+	const loadingIcon = document.createElement("div");
+	setStyles(style.loadingIconStyle, loadingIcon);
+
+	const loadingLabel = document.createElement("label");
+	loadingLabel.innerText = "Loading...";
+
+	appendChildren([loadingIcon, loadingLabel], loadingDiv);
 	appendChildren([emptyIcon, emptyLabel], emptyDiv);
-	appendChildren([emptyDiv], emptyTd);
+
+	appendChildren([window.data.isLoading ? loadingDiv : emptyDiv], emptyTd);
 	appendChildren([emptyTd], emptyTasks);
 
 	if (!tasks.length) appendChildren([tbHeadRow, emptyTasks], tasksTb);

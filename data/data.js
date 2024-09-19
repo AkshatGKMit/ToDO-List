@@ -2,42 +2,7 @@ import { formatDate, sortList } from "../helpers/helpers.js";
 import Task from "../models/task.js";
 
 window.tasks = {
-	list: [
-		// {
-		// 	idx: 1,
-		// 	status: "Incomplete",
-		// 	title: "Internal Response Agent",
-		// 	date: new Date("2024-05-19"),
-		// 	deadline: new Date("2024-02-31"),
-		// 	description:
-		// 		"Sit possimus quod quas laboriosam et sed corporis ipsa. Corrupti omnis qui ea dicta.",
-		// },
-		// {
-		// 	idx: 2,
-		// 	title: "Chief Branding Manager",
-		// 	description: "Dolores impedit nostrum eum quod. Aut doloribus eum.",
-		// 	status: "Forgotten",
-		// 	deadline: new Date("2025-03-18"),
-		// 	date: new Date("2023-07-19"),
-		// },
-		// {
-		// 	idx: 3,
-		// 	title: "Lead Accounts Analyst",
-		// 	description:
-		// 		"Facere harum est officia et et quia. Enim fugit qui voluptas est molestiae corrupti.",
-		// 	status: "Incomplete",
-		// 	deadline: "None",
-		// 	date: new Date("2024-07-19"),
-		// },
-		// {
-		// 	idx: 4,
-		// 	title: "District Operations Director",
-		// 	description: "Cum recusandae et. Minima distinctio tempore.",
-		// 	status: "Completed",
-		// 	deadline: new Date("2024-11-05"),
-		// 	date: new Date("2025-03-19"),
-		// },
-	],
+	list: [],
 	getAll: function () {
 		return this.list.filter((task) => {
 			const isIncomplete = task.status.toLowerCase() === "incomplete";
@@ -61,6 +26,7 @@ window.tasks = {
 	loadAll: function () {
 		this.list = JSON.parse(localStorage.getItem("tasks")) ?? [];
 		this.list.forEach((task) => (task.date = new Date(task.date)));
+		window.data.toggleLoading(false);
 	},
 	save: function () {
 		localStorage.setItem("tasks", JSON.stringify(this.list));
@@ -116,6 +82,10 @@ window.tasks = {
 };
 
 window.data = {
+	isLoading: true,
+	toggleLoading: function (value) {
+		this.isLoading = value ?? !this.isLoading;
+	},
 	isDialogOpen: false,
 	toggleDialog: function () {
 		this.isDialogOpen = !this.isDialogOpen;

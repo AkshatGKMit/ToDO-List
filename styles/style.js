@@ -103,8 +103,29 @@ export const emptyTasksStyle = {
 	color: "#808080",
 };
 
+export const loaderDivStyle = {
+	display: "flex",
+	flexDirection: "column",
+	alignItems: "center",
+	justifyContent: "center",
+	gap: "1rem",
+	margin: "3rem",
+	fontSize: "2rem",
+	fontWeight: "900",
+	color: "black",
+};
+
 export const emptyIconStyle = {
 	display: "block",
 	height: "9rem",
 	width: "9rem",
+};
+
+export const loadingIconStyle = {
+	height: "6rem",
+	width: "6rem",
+	border: "10px solid black",
+	borderTop: "10px solid transparent",
+	borderRadius: "10rem",
+	animation: "spin 2s linear infinite",
 };
