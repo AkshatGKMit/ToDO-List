@@ -1,3 +1,4 @@
+import { sortList } from "../helpers/helpers.js";
 import Task from "../models/task.js";
 
 window.tasks = {
@@ -6,8 +7,8 @@ window.tasks = {
 			idx: 1,
 			status: "Incomplete",
 			title: "Internal Response Agent",
-			date: "Sep-19-2024",
-			deadline: "Oct-31-2024",
+			date: new Date("2024-05-19"),
+			deadline: new Date("2024-02-31"),
 			description:
 				"Sit possimus quod quas laboriosam et sed corporis ipsa. Corrupti omnis qui ea dicta.",
 		},
@@ -15,9 +16,9 @@ window.tasks = {
 			idx: 2,
 			title: "Chief Branding Manager",
 			description: "Dolores impedit nostrum eum quod. Aut doloribus eum.",
-			status: "Incomplete",
-			deadline: "Feb-18-2025",
-			date: "Sep-19-2024",
+			status: "Forgotten",
+			deadline: new Date("2025-03-18"),
+			date: new Date("2023-07-19"),
 		},
 		{
 			idx: 3,
@@ -25,16 +26,16 @@ window.tasks = {
 			description:
 				"Facere harum est officia et et quia. Enim fugit qui voluptas est molestiae corrupti.",
 			status: "Incomplete",
-			deadline: "Aug-23-2025",
-			date: "Sep-19-2024",
+			deadline: new Date("2025-08-23"),
+			date: new Date("2024-07-19"),
 		},
 		{
 			idx: 4,
 			title: "District Operations Director",
 			description: "Cum recusandae et. Minima distinctio tempore.",
-			status: "Incomplete",
-			deadline: "Oct-05-2024",
-			date: "Sep-19-2024",
+			status: "Completed",
+			deadline: new Date("2024-11-05"),
+			date: new Date("2025-03-19"),
 		},
 	],
 	getAll: function () {
@@ -46,6 +47,9 @@ window.tasks = {
 	delete: function (idx) {
 		this.list = this.list.filter((_, id) => id !== idx);
 	},
+	sort: function (sortBy) {
+		sortList(this.list, sortBy);
+	},
 };
 
 window.data = {
@@ -54,7 +58,28 @@ window.data = {
 		this.isDialogOpen = !this.isDialogOpen;
 		renderDialog();
 	},
-	taskStatusEnum: ["Completed", "Incompleted", "Forgotten"],
+	tableHeadCellNames: [
+		"Sr.No.",
+		"Status",
+		"Name",
+		"Date Created",
+		"Deadline",
+		"Description",
+		"Edit",
+		"Delete",
+	],
+	sortMethods: {
+		status: ["Completed", "Incomplete", "Forgotten"],
+		name: ["Ascending", "Descending"],
+		date: ["Ascending", "Descending"],
+		deadline: ["Closest", "Farthest"],
+	},
+	sortOrder: {
+		status: 0,
+		name: 0,
+		date: 0,
+		deadline: 0,
+	},
 };
 
 window.addTaskData = {
