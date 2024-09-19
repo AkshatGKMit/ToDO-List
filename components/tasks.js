@@ -1,6 +1,13 @@
 import { DeleteIcon, EditIcon } from "../assets/icons.js";
-import { appendChildren, setStyles } from "../helpers/helpers.js";
+import {
+	appendChildren,
+	formatDate,
+	setStyles,
+	showModal,
+} from "../helpers/helpers.js";
 import * as style from "../styles/style.js";
+import { renderDialog } from "./add_task_dialog.js";
+import { modal } from "./modal.js";
 
 export const tasksTb = document.createElement("table");
 setStyles(style.tbStyle, tasksTb);
@@ -31,16 +38,8 @@ export const renderTable = function (obj) {
 			idx + 1,
 			task.status,
 			task.title,
-			`${task.date.getDate().toString().padStart(2, "0")}-${(
-				task.date.getMonth() + 1
-			)
-				.toString()
-				.padStart(2, "0")}-${task.date.getFullYear()}`,
-			`${task.deadline.getDate().toString().padStart(2, "0")}-${(
-				task.deadline.getMonth() + 1
-			)
-				.toString()
-				.padStart(2, "0")}-${task.deadline.getFullYear()}`,
+			formatDate(task.date),
+			task.deadline === "None" ? task.deadline : formatDate(task.deadline),
 			task.description,
 		].map((text) => {
 			const td = document.createElement("td");
@@ -55,6 +54,10 @@ export const renderTable = function (obj) {
 		const editBtnElem = document.createElement("button");
 		editBtnElem.innerHTML = EditIcon;
 		setStyles(style.editDelIconStyle, editBtnElem);
+		editBtnElem.onclick = function () {
+			showModal(modal, idx);
+			renderDialog();
+		};
 
 		const delCell = document.createElement("td");
 		setStyles(style.tbCellStyle, delCell);

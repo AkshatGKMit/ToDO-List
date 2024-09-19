@@ -5,6 +5,7 @@ import { modal } from "./modal.js";
 import { headerTag } from "./header.js";
 import { tasksTb } from "./tasks.js";
 import { topWrapper } from "./search.js";
+import { renderDialog } from "./add_task_dialog.js";
 
 export const body = document.body;
 setStyles(style.bodyStyle, body);
@@ -15,6 +16,7 @@ setStyles(style.floatingButtonStyle, addButtonElem);
 
 addButtonElem.onclick = function () {
 	showModal(modal);
+	renderDialog();
 	setStyles({ scale: 0.95 }, this);
 	setTimeout(() => {
 		setStyles({ scale: 1 }, this);

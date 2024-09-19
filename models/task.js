@@ -3,8 +3,8 @@ class Task {
 		this.title = title;
 		this.description = description;
 		this.status = window.data.sortMethods.status[1];
-		this.deadline = deadline;
-		this.date = Date.now();
+		this.deadline = new Date(deadline);
+		this.date = new Date();
 	}
 }
 

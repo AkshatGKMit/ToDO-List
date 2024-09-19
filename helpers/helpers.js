@@ -17,11 +17,19 @@ export const renderElement = function (element, newContent) {
 	element.appendChild(newContent);
 };
 
-export const showModal = function (modal) {
+export const showModal = function (modal, forUpdate) {
+	if (forUpdate !== undefined) {
+		window.data.toggleDialogForUpdate();
+		window.tasks.setUpdatingTask(forUpdate);
+	} else {
+		window.tasks.setUpdatingTask(-1);
+	}
+
 	appendChildren([modal], document.body);
 };
 
 export const hideModal = function (modal) {
+	if (window.data.isDialogForUpdate) window.data.toggleDialogForUpdate();
 	document.body.removeChild(modal);
 };
 
@@ -90,4 +98,16 @@ export const sortList = function (list, sortBy) {
 		default:
 			break;
 	}
+};
+
+export const formatDate = function (date) {
+	return `${date.getDate().toString().padStart(2, "0")}-${(date.getMonth() + 1)
+		.toString()
+		.padStart(2, "0")}-${date.getFullYear()}`;
+};
+
+export const formatDateReversed = function (date) {
+	return `${date.getFullYear()}-${(date.getMonth() + 1)
+		.toString()
+		.padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
 };

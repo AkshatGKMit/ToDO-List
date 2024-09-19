@@ -1,4 +1,4 @@
-import { sortList } from "../helpers/helpers.js";
+import { formatDate, sortList } from "../helpers/helpers.js";
 import Task from "../models/task.js";
 
 window.tasks = {
@@ -26,7 +26,7 @@ window.tasks = {
 			description:
 				"Facere harum est officia et et quia. Enim fugit qui voluptas est molestiae corrupti.",
 			status: "Incomplete",
-			deadline: new Date("2025-08-23"),
+			deadline: "None",
 			date: new Date("2024-07-19"),
 		},
 		{
@@ -64,23 +64,22 @@ window.tasks = {
 	delete: function (idx) {
 		this.list = this.list.filter((_, id) => id !== idx);
 	},
+	update: function (updatedValue) {
+		this.list[this.updatingTaskIdx] = updatedValue;
+		console.log(updatedValue);
+	},
 	sort: function (sortBy) {
 		sortList(this.list, sortBy);
 	},
 	search: function (value) {
+		value = value.toLowerCase();
 		return this.list.reduce((acc, task) => {
 			if (
 				task.title.toLowerCase().includes(value) ||
-				`${task.date.getDate().toString().padStart(2, "0")}-${(
-					task.date.getMonth() + 1
-				)
-					.toString()
-					.padStart(2, "0")}-${task.date.getFullYear()}`.includes(value) ||
-				`${task.deadline.getDate().toString().padStart(2, "0")}-${(
-					task.deadline.getMonth() + 1
-				)
-					.toString()
-					.padStart(2, "0")}-${task.deadline.getFullYear()}`.includes(value) ||
+				formatDate(task.date).includes(value) ||
+				(task.deadline.toString().toLowerCase() === "none"
+					? "none".includes(value)
+					: formatDate(task.deadline).includes(value)) ||
 				task.description.toLowerCase().includes(value)
 			)
 				acc.push(task);
@@ -96,6 +95,10 @@ window.tasks = {
 	toggleForgotten: function () {
 		this.showForgotten = !this.showForgotten;
 	},
+	updatingTaskIdx: -1,
+	setUpdatingTask: function (newIdx) {
+		this.updatingTaskIdx = newIdx;
+	},
 };
 
 window.data = {
@@ -103,6 +106,10 @@ window.data = {
 	toggleDialog: function () {
 		this.isDialogOpen = !this.isDialogOpen;
 		renderDialog();
+	},
+	isDialogForUpdate: false,
+	toggleDialogForUpdate: function () {
+		this.isDialogForUpdate = !this.isDialogForUpdate;
 	},
 	tableHeadCellNames: [
 		"Sr.No.",
@@ -134,8 +141,9 @@ window.addTaskData = {
 		this.title = title;
 	},
 	deadlineToggle: false,
-	toggleDeadline: function () {
-		this.deadlineToggle = !this.deadlineToggle;
+	toggleDeadline: function (value) {
+		this.deadlineToggle = value;
+		console.log(this.deadlineToggle);
 	},
 	deadline: "",
 	setDeadline: function (deadline) {
@@ -151,13 +159,22 @@ window.addTaskData = {
 		this.description = "";
 	},
 	appendTask: function () {
-		window.tasks.push(
+		window.tasks.add(
 			new Task({
 				title: this.title,
-				deadline: this.deadlineToggle ? this.deadline : "none",
+				deadline: this.deadlineToggle ? this.deadline : "None",
 				description: this.description,
 			})
 		);
 		this.resetData();
+	},
+	updateTask: function () {
+		window.tasks.update(
+			new Task({
+				title: this.title,
+				deadline: this.deadlineToggle ? this.deadline : "None",
+				description: this.description,
+			})
+		);
 	},
 };

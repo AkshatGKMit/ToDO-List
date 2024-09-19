@@ -36,7 +36,7 @@ export const addTaskInputStyle = {
 	minWidth: "15rem",
 };
 
-export const addTaskDialogStyle = {
+export const taskDialogStyle = {
 	position: "absolute",
 	zIndex: 3,
 	top: "50%",
