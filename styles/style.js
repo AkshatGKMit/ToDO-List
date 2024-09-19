@@ -73,3 +73,12 @@ export const tbHeadStyle = {
 	backgroundColor: "black",
 	padding: "0.1rem 1rem",
 };
+
+export const editDelIconStyle = {
+	display: "block",
+	height: "1.75rem",
+	width: "1.75rem",
+	backgroundColor: "transparent",
+	border: "none",
+	margin: "auto",
+};

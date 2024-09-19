@@ -1,3 +1,4 @@
+import { DeleteIcon, EditIcon } from "../assets/icons.js";
 import { appendChildren, setStyles } from "../helpers/helpers.js";
 import * as style from "../styles/style.js";
 
@@ -12,6 +13,8 @@ const headCells = [
 	"Date Created",
 	"Deadline",
 	"Description",
+	"Edit",
+	"Delete",
 ].map((text) => {
 	const td = document.createElement("th");
 	td.innerText = text;
@@ -42,7 +45,23 @@ export const renderTable = function () {
 			return td;
 		});
 
-		appendChildren(cells, newTask);
+		const editCell = document.createElement("td");
+		setStyles(style.tbCellStyle, editCell);
+
+		const editBtnElem = document.createElement("button");
+		editBtnElem.innerHTML = EditIcon;
+		setStyles(style.editDelIconStyle, editBtnElem);
+
+		const delCell = document.createElement("td");
+		setStyles(style.tbCellStyle, delCell);
+
+		const delBtnElem = document.createElement("button");
+		delBtnElem.innerHTML = DeleteIcon;
+		setStyles(style.editDelIconStyle, delBtnElem);
+
+		appendChildren([editBtnElem], editCell);
+		appendChildren([delBtnElem], delCell);
+		appendChildren([...cells, editCell, delCell], newTask);
 		return newTask;
 	});
 
