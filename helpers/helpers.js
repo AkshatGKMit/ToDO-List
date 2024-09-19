@@ -12,11 +12,6 @@ export const appendChildren = function (children, parent) {
 	});
 };
 
-export const renderElement = function (element, newContent) {
-	element.innerHTML = "";
-	element.appendChild(newContent);
-};
-
 export const showModal = function (modal, forUpdate) {
 	if (forUpdate !== undefined) {
 		window.data.toggleDialogForUpdate();

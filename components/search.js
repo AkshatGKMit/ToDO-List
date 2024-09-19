@@ -3,7 +3,7 @@ import {
 	setAttributes,
 	setStyles,
 } from "../helpers/helpers.js";
-import { renderTable } from "./tasks.js";
+import { renderTable } from "../renders/render.js";
 
 export const topWrapper = document.createElement("div");
 setStyles(

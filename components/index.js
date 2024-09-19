@@ -5,7 +5,7 @@ import { modal } from "./modal.js";
 import { headerTag } from "./header.js";
 import { tasksTb } from "./tasks.js";
 import { topWrapper } from "./search.js";
-import { renderDialog } from "./add_task_dialog.js";
+import { renderDialog } from "../renders/render.js";
 
 export const body = document.body;
 setStyles(style.bodyStyle, body);
