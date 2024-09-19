@@ -4,7 +4,7 @@ import { AddIcon } from "../assets/icons.js";
 import { modal } from "./modal.js";
 import { headerTag } from "./header.js";
 import { tasksTb } from "./tasks.js";
-import { searchWrapper } from "./search.js";
+import { topWrapper } from "./search.js";
 
 export const body = document.body;
 setStyles(style.bodyStyle, body);
@@ -31,4 +31,4 @@ addButtonElem.onmouseover = function () {
 	);
 };
 
-appendChildren([headerTag, addButtonElem, searchWrapper, tasksTb], body);
+appendChildren([headerTag, addButtonElem, topWrapper, tasksTb], body);

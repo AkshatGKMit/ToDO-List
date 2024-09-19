@@ -39,7 +39,24 @@ window.tasks = {
 		},
 	],
 	getAll: function () {
-		return this.list;
+		return this.list.filter((task) => {
+			const isIncomplete = task.status.toLowerCase() === "incomplete";
+			const isCompleted = task.status.toLowerCase() === "completed";
+			const isForgotten = task.status.toLowerCase() === "forgotten";
+
+			if (isIncomplete) return true;
+
+			if (this.showCompleted && this.showForgotten) return true;
+
+			if (!this.showCompleted && !this.showForgotten && !isIncomplete)
+				return false;
+
+			if (!this.showCompleted && !isCompleted) return true;
+
+			if (!this.showForgotten && !isForgotten) return true;
+
+			return false;
+		});
 	},
 	add: function (task) {
 		this.list.push(task);
@@ -70,6 +87,14 @@ window.tasks = {
 
 			return acc;
 		}, []);
+	},
+	showCompleted: true,
+	toggleCompleted: function () {
+		this.showCompleted = !this.showCompleted;
+	},
+	showForgotten: true,
+	toggleForgotten: function () {
+		this.showForgotten = !this.showForgotten;
 	},
 };
 

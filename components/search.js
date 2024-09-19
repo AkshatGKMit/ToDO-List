@@ -1,20 +1,59 @@
-import { appendChildren, setAttributes } from "../helpers/helpers.js";
+import {
+	appendChildren,
+	setAttributes,
+	setStyles,
+} from "../helpers/helpers.js";
 import { renderTable } from "./tasks.js";
 
-export const searchWrapper = document.createElement("div");
+export const topWrapper = document.createElement("div");
+setStyles(
+	{
+		display: "flex",
+		flexDirection: "row",
+		gap: "2rem",
+	},
+	topWrapper
+);
 
-const inputField = document.createElement("input");
+const searchField = document.createElement("input");
 setAttributes(
 	{
 		type: "text",
 		placeholder: "Search by name, dates or description",
 	},
-	inputField
+	searchField
 );
-inputField.onkeyup = function (ev) {
+searchField.onkeyup = function (ev) {
 	const searchValue = ev.target.value;
 	const searchList = window.tasks.search(searchValue);
 	renderTable(searchList);
 };
 
-appendChildren([inputField], searchWrapper);
+const showCompletedWrapper = document.createElement("div");
+const completedLabel = document.createElement("label");
+completedLabel.innerText = "Show Completed";
+
+const completedCheckbox = document.createElement("input");
+setAttributes({ type: "checkbox", checked: true }, completedCheckbox);
+completedCheckbox.onchange = function () {
+	window.tasks.toggleCompleted();
+	renderTable();
+};
+
+const showForgottenWrapper = document.createElement("div");
+const forgottenLabel = document.createElement("label");
+forgottenLabel.innerText = "Show Forgotten";
+
+const forgottenCheckbox = document.createElement("input");
+setAttributes({ type: "checkbox", checked: true }, forgottenCheckbox);
+forgottenCheckbox.onchange = function () {
+	window.tasks.toggleForgotten();
+	renderTable();
+};
+
+appendChildren([completedLabel, completedCheckbox], showCompletedWrapper);
+appendChildren([forgottenLabel, forgottenCheckbox], showForgottenWrapper);
+appendChildren(
+	[searchField, showCompletedWrapper, showForgottenWrapper],
+	topWrapper
+);
