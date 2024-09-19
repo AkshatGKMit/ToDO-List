@@ -1,6 +1,6 @@
 import Task from "../models/task.js";
 
-export const tasks = {
+window.tasks = {
 	list: [],
 	getAll: function () {
 		return this.list;
@@ -10,14 +10,14 @@ export const tasks = {
 	},
 };
 
-export const data = {
+window.data = {
 	isDialogOpen: false,
 	toggleDialog: function () {
 		this.isDialogOpen = !this.isDialogOpen;
 	},
 };
 
-export const addTaskData = {
+window.addTaskData = {
 	title: "",
 	setTitle: function (title) {
 		this.title = title;

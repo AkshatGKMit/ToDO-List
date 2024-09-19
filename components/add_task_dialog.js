@@ -1,7 +1,7 @@
 import { setAttributes, setStyles, hideModal } from "../helpers/helpers.js";
 import * as style from "../styles/style.js";
 import { modal } from "./modal.js";
-import { addTaskData } from "../data/data.js";
+// import { addTaskData } from "../data/data.js";
 
 export const addTaskDialogBox = document.createElement("div");
 setStyles(style.addTaskDialogStyle, addTaskDialogBox);
@@ -69,7 +69,7 @@ taskDeadlineRow.appendChild(label);
 const checkbox = document.createElement("input");
 setAttributes({ type: "checkbox" }, checkbox);
 checkbox.onchange = function (ev) {
-	addTaskData.toggleDeadline(ev.target.checked);
+	window.addTaskData.toggleDeadline(ev.target.checked);
 	taskDeadlineInp.disabled = !ev.target.checked;
 };
 taskDeadlineRow.appendChild(checkbox);
@@ -144,8 +144,8 @@ setStyles(
 );
 
 addBtn.onclick = function () {
-	addTaskData.setTitle(taskNameInp.value);
-	addTaskData.dea;
+	window.addTaskData.setTitle(taskNameInp.value);
+	// window.addTaskData.dea;
 };
 
 addTaskBtns.appendChild(addBtn);
