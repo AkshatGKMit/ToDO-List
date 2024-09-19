@@ -3,7 +3,7 @@ class Task {
 		this.title = title;
 		this.description = description;
 		this.status = window.data.sortMethods.status[1];
-		this.deadline = new Date(deadline);
+		this.deadline = deadline === "None" ? "None" : new Date(deadline);
 		this.date = new Date();
 	}
 }

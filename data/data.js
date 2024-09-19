@@ -58,20 +58,32 @@ window.tasks = {
 			return false;
 		});
 	},
+	loadAll: function () {
+		this.list = JSON.parse(localStorage.getItem("tasks")) ?? [];
+		this.list.forEach((task) => (task.date = new Date(task.date)));
+	},
+	save: function () {
+		localStorage.setItem("tasks", JSON.stringify(this.list));
+	},
 	add: function (task) {
 		this.list.push(task);
+		this.save();
 	},
 	delete: function (idx) {
 		this.list = this.list.filter((_, id) => id !== idx);
+		this.save();
 	},
 	update: function (updatedValue) {
 		this.list[this.updatingTaskIdx] = updatedValue;
+		this.save();
 	},
 	updateStatus: function (idx) {
 		this.list[idx].status = "Completed";
+		this.save();
 	},
 	sort: function (sortBy) {
 		sortList(this.list, sortBy);
+		this.save();
 	},
 	search: function (value) {
 		value = value.toLowerCase();
