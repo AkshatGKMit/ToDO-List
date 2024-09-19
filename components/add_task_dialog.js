@@ -1,4 +1,4 @@
-import { setStyles } from "../helpers.js";
+import { setAttributes, setStyles } from "../helpers.js";
 import * as style from "../style.js";
 import { hideModal } from "../helpers.js";
 import { modal } from "./modal.js";
@@ -36,10 +36,14 @@ taskNameLabel.innerText = "Title";
 nameInpWrapper.appendChild(taskNameLabel);
 
 const taskNameInp = document.createElement("input");
-taskNameInp.setAttribute("type", "text");
-taskNameInp.setAttribute("autocomplete", "true");
-taskNameInp.setAttribute("required", "true");
-taskNameInp.setAttribute("placeholder", "*required");
+setAttributes(
+	{
+		type: "text",
+		autocomplete: true,
+		placeholder: "*required",
+	},
+	taskNameInp
+);
 setStyles(style.addTaskInputStyle, taskNameInp);
 
 taskNameInp.addEventListener("focus", (ev) => alert);
@@ -64,7 +68,7 @@ label.innerText = "Deadline";
 taskDeadlineRow.appendChild(label);
 
 const checkbox = document.createElement("input");
-checkbox.setAttribute("type", "checkbox");
+setAttributes({ type: "checkbox" }, checkbox);
 checkbox.onchange = function (ev) {
 	addTaskData.toggleDeadline(ev.target.checked);
 	taskDeadlineInp.disabled = !ev.target.checked;
@@ -74,11 +78,14 @@ taskDeadlineRow.appendChild(checkbox);
 deadlineInpWrapper.appendChild(taskDeadlineRow);
 
 const taskDeadlineInp = document.createElement("input");
-taskDeadlineInp.setAttribute("type", "date");
-taskDeadlineInp.setAttribute("autocomplete", "true");
-taskDeadlineInp.disabled = checkbox.value;
-taskDeadlineInp.disabled = checkbox.value;
-taskDeadlineInp.setAttribute("placeholder", "*required");
+setAttributes(
+	{
+		type: Date,
+		autocomplete: true,
+		disabled: checkbox.value,
+	},
+	taskDeadlineInp
+);
 setStyles(style.addTaskInputStyle, taskDeadlineInp);
 deadlineInpWrapper.appendChild(taskDeadlineInp);
 
@@ -91,10 +98,15 @@ taskDescriptionLabel.innerText = "Description";
 descriptionInpWrapper.appendChild(taskDescriptionLabel);
 
 const taskDescriptionInp = document.createElement("textarea");
-taskDescriptionInp.setAttribute("rows", "5");
+setAttributes(
+	{
+		rows: 5,
+		placeholder: "(optional)",
+	},
+	taskDescriptionInp
+);
 setStyles(style.addTaskInputStyle, taskDescriptionInp);
 descriptionInpWrapper.appendChild(taskDescriptionInp);
-taskDescriptionInp.setAttribute("placeholder", "(optional)");
 
 inputList.appendChild(descriptionInpWrapper);
 
