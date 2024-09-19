@@ -8,7 +8,7 @@ setStyles(
 	{
 		display: "flex",
 		justifyContent: "center",
-		margin: "0.5rem 1rem",
+		margin: "0.25rem 1rem",
 	},
 	headerTag
 );

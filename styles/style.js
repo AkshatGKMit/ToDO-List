@@ -1,3 +1,11 @@
+export const bodyStyle = {
+	backgroundColor: "#00ffaa",
+	padding: "1rem",
+	display: "flex",
+	flexDirection: "column",
+	gap: "1rem",
+};
+
 export const addTaskDialogBtnsStyle = {
 	border: "none",
 	borderRadius: "12px",
@@ -56,7 +64,6 @@ export const barrierStyle = {
 };
 
 export const tbStyle = {
-	margin: "1rem",
 	border: "1px solid black",
 	borderCollapse: "collapse",
 };

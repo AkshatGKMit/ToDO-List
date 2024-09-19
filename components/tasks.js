@@ -18,11 +18,11 @@ const headCells = window.data.tableHeadCellNames.map((text, idx) => {
 });
 appendChildren(headCells, tbHeadRow);
 
-export const renderTable = function () {
+export const renderTable = function (obj) {
 	tasksTb.innerHTML = "";
 
 	const tasksObj = window.tasks;
-	const tasks = tasksObj.getAll();
+	const tasks = obj ?? tasksObj.getAll();
 
 	const taskElements = tasks.map((task, idx) => {
 		const newTask = document.createElement("tr");

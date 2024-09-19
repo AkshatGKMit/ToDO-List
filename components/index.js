@@ -4,9 +4,10 @@ import { AddIcon } from "../assets/icons.js";
 import { modal } from "./modal.js";
 import { headerTag } from "./header.js";
 import { tasksTb } from "./tasks.js";
+import { searchWrapper } from "./search.js";
 
 export const body = document.body;
-body.style.backgroundColor = "#00ffaa";
+setStyles(style.bodyStyle, body);
 
 export const addButtonElem = document.createElement("button");
 addButtonElem.innerHTML = AddIcon;
@@ -30,4 +31,4 @@ addButtonElem.onmouseover = function () {
 	);
 };
 
-appendChildren([headerTag, addButtonElem, tasksTb], body);
+appendChildren([headerTag, addButtonElem, searchWrapper, tasksTb], body);

@@ -50,6 +50,27 @@ window.tasks = {
 	sort: function (sortBy) {
 		sortList(this.list, sortBy);
 	},
+	search: function (value) {
+		return this.list.reduce((acc, task) => {
+			if (
+				task.title.toLowerCase().includes(value) ||
+				`${task.date.getDate().toString().padStart(2, "0")}-${(
+					task.date.getMonth() + 1
+				)
+					.toString()
+					.padStart(2, "0")}-${task.date.getFullYear()}`.includes(value) ||
+				`${task.deadline.getDate().toString().padStart(2, "0")}-${(
+					task.deadline.getMonth() + 1
+				)
+					.toString()
+					.padStart(2, "0")}-${task.deadline.getFullYear()}`.includes(value) ||
+				task.description.toLowerCase().includes(value)
+			)
+				acc.push(task);
+
+			return acc;
+		}, []);
+	},
 };
 
 window.data = {
