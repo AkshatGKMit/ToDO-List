@@ -3,40 +3,40 @@ import Task from "../models/task.js";
 
 window.tasks = {
 	list: [
-		{
-			idx: 1,
-			status: "Incomplete",
-			title: "Internal Response Agent",
-			date: new Date("2024-05-19"),
-			deadline: new Date("2024-02-31"),
-			description:
-				"Sit possimus quod quas laboriosam et sed corporis ipsa. Corrupti omnis qui ea dicta.",
-		},
-		{
-			idx: 2,
-			title: "Chief Branding Manager",
-			description: "Dolores impedit nostrum eum quod. Aut doloribus eum.",
-			status: "Forgotten",
-			deadline: new Date("2025-03-18"),
-			date: new Date("2023-07-19"),
-		},
-		{
-			idx: 3,
-			title: "Lead Accounts Analyst",
-			description:
-				"Facere harum est officia et et quia. Enim fugit qui voluptas est molestiae corrupti.",
-			status: "Incomplete",
-			deadline: "None",
-			date: new Date("2024-07-19"),
-		},
-		{
-			idx: 4,
-			title: "District Operations Director",
-			description: "Cum recusandae et. Minima distinctio tempore.",
-			status: "Completed",
-			deadline: new Date("2024-11-05"),
-			date: new Date("2025-03-19"),
-		},
+		// {
+		// 	idx: 1,
+		// 	status: "Incomplete",
+		// 	title: "Internal Response Agent",
+		// 	date: new Date("2024-05-19"),
+		// 	deadline: new Date("2024-02-31"),
+		// 	description:
+		// 		"Sit possimus quod quas laboriosam et sed corporis ipsa. Corrupti omnis qui ea dicta.",
+		// },
+		// {
+		// 	idx: 2,
+		// 	title: "Chief Branding Manager",
+		// 	description: "Dolores impedit nostrum eum quod. Aut doloribus eum.",
+		// 	status: "Forgotten",
+		// 	deadline: new Date("2025-03-18"),
+		// 	date: new Date("2023-07-19"),
+		// },
+		// {
+		// 	idx: 3,
+		// 	title: "Lead Accounts Analyst",
+		// 	description:
+		// 		"Facere harum est officia et et quia. Enim fugit qui voluptas est molestiae corrupti.",
+		// 	status: "Incomplete",
+		// 	deadline: "None",
+		// 	date: new Date("2024-07-19"),
+		// },
+		// {
+		// 	idx: 4,
+		// 	title: "District Operations Director",
+		// 	description: "Cum recusandae et. Minima distinctio tempore.",
+		// 	status: "Completed",
+		// 	deadline: new Date("2024-11-05"),
+		// 	date: new Date("2025-03-19"),
+		// },
 	],
 	getAll: function () {
 		return this.list.filter((task) => {
@@ -66,7 +66,6 @@ window.tasks = {
 	},
 	update: function (updatedValue) {
 		this.list[this.updatingTaskIdx] = updatedValue;
-		console.log(updatedValue);
 	},
 	updateStatus: function (idx) {
 		this.list[idx].status = "Completed";
@@ -145,7 +144,6 @@ window.addTaskData = {
 	deadlineToggle: false,
 	toggleDeadline: function (value) {
 		this.deadlineToggle = value;
-		console.log(this.deadlineToggle);
 	},
 	deadline: "",
 	setDeadline: function (deadline) {

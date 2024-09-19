@@ -90,3 +90,21 @@ export const editDelIconStyle = {
 	border: "none",
 	margin: "auto",
 };
+
+export const emptyTasksStyle = {
+	display: "flex",
+	flexDirection: "column",
+	alignItems: "center",
+	justifyContent: "center",
+	gap: "1rem",
+	margin: "3rem",
+	fontSize: "2rem",
+	fontWeight: "900",
+	color: "#808080",
+};
+
+export const emptyIconStyle = {
+	display: "block",
+	height: "9rem",
+	width: "9rem",
+};

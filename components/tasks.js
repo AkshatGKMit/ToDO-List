@@ -1,4 +1,4 @@
-import { DeleteIcon, EditIcon } from "../assets/icons.js";
+import { DeleteIcon, EditIcon, ErrorIcon } from "../assets/icons.js";
 import {
 	appendChildren,
 	formatDate,
@@ -86,7 +86,26 @@ export const renderTable = function (obj) {
 		return newTask;
 	});
 
-	appendChildren([tbHeadRow, ...taskElements], tasksTb);
+	const emptyTasks = document.createElement("tr");
+	const emptyTd = document.createElement("td");
+	setAttributes({ colspan: headCells.length }, emptyTd);
+
+	const emptyDiv = document.createElement("div");
+	setStyles(style.emptyTasksStyle, emptyDiv);
+
+	const emptyIcon = document.createElement("div");
+	emptyIcon.innerHTML = ErrorIcon;
+	setStyles(style.emptyIconStyle, emptyIcon);
+
+	const emptyLabel = document.createElement("label");
+	emptyLabel.innerHTML = "No Task to display";
+
+	appendChildren([emptyIcon, emptyLabel], emptyDiv);
+	appendChildren([emptyDiv], emptyTd);
+	appendChildren([emptyTd], emptyTasks);
+
+	if (!tasks.length) appendChildren([tbHeadRow, emptyTasks], tasksTb);
+	else appendChildren([tbHeadRow, ...taskElements], tasksTb);
 };
 
 renderTable();
