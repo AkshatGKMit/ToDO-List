@@ -79,6 +79,7 @@ export const tbHeadStyle = {
 	color: "white",
 	backgroundColor: "black",
 	padding: "0.1rem 1rem",
+	borderColor: "grey",
 };
 
 export const editDelIconStyle = {

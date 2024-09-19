@@ -2,6 +2,7 @@ import { DeleteIcon, EditIcon } from "../assets/icons.js";
 import {
 	appendChildren,
 	formatDate,
+	setAttributes,
 	setStyles,
 	showModal,
 } from "../helpers/helpers.js";
@@ -35,7 +36,6 @@ export const renderTable = function (obj) {
 		const newTask = document.createElement("tr");
 
 		const cells = [
-			idx + 1,
 			task.status,
 			task.title,
 			formatDate(task.date),
@@ -45,6 +45,16 @@ export const renderTable = function (obj) {
 			const td = document.createElement("td");
 			td.innerText = text;
 			setStyles(style.tbCellStyle, td);
+			if (text === task.status && task.status === "Incomplete") {
+				const statusCheckbox = document.createElement("input");
+				setAttributes({ type: "checkbox" }, statusCheckbox);
+				statusCheckbox.onchange = function (ev) {
+					window.tasks.updateStatus(idx);
+					renderTable();
+				};
+
+				appendChildren([statusCheckbox], td);
+			}
 			return td;
 		});
 

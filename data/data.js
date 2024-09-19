@@ -68,6 +68,9 @@ window.tasks = {
 		this.list[this.updatingTaskIdx] = updatedValue;
 		console.log(updatedValue);
 	},
+	updateStatus: function (idx) {
+		this.list[idx].status = "Completed";
+	},
 	sort: function (sortBy) {
 		sortList(this.list, sortBy);
 	},
@@ -112,7 +115,6 @@ window.data = {
 		this.isDialogForUpdate = !this.isDialogForUpdate;
 	},
 	tableHeadCellNames: [
-		"Sr.No.",
 		"Status",
 		"Name",
 		"Date Created",
