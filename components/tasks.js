@@ -1,19 +1,20 @@
-import { appendChildren, setStyles } from "../helpers/helpers.js";
+import { appendChildren, createElement } from "../helpers/helpers.js";
 import { renderTable } from "../renders/render.js";
 import * as style from "../styles/style.js";
 
-export const tasksTb = document.createElement("table");
-setStyles(style.tbStyle, tasksTb);
+export const tasksTb = createElement({ type: "table", styles: style.tbStyle });
 
-export const tbHeadRow = document.createElement("tr");
+export const tbHeadRow = createElement({ type: "tr" });
 export const headCells = window.data.tableHeadCellNames.map((text, idx) => {
-	const td = document.createElement("th");
-	td.innerText = text;
-	setStyles(style.tbHeadStyle, td);
-	td.onclick = function () {
-		window.tasks.sort(idx);
-		renderTable();
-	};
+	const td = createElement({
+		type: "th",
+		innerText: text,
+		styles: style.tbHeadStyle,
+		onclick: function () {
+			window.tasks.sort(idx);
+			renderTable();
+		},
+	});
 	return td;
 });
 appendChildren(headCells, tbHeadRow);

@@ -1,16 +1,13 @@
-import { appendChildren, setStyles } from "../helpers/helpers.js";
+import { appendChildren, createElement } from "../helpers/helpers.js";
 
-export const headerTag = document.createElement("header");
-const headingElem = document.createElement("h1");
-headingElem.innerText = "ToDo List";
-
-setStyles(
-	{
+export const headerTag = createElement({ type: "header" });
+const headingElem = createElement({
+	type: "h1",
+	innerText: "ToDo List",
+	styles: {
 		display: "flex",
 		justifyContent: "center",
 		margin: "0.25rem 1rem",
 	},
-	headerTag
-);
-
+});
 appendChildren([headingElem], headerTag);

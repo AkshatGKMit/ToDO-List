@@ -1,13 +1,12 @@
 "use strict";
 
 import {
-	setStyles,
-	setAttributes,
 	showModal,
 	hideModal,
 	appendChildren,
 	formatDateReversed,
 	formatDate,
+	createElement,
 } from "../helpers/helpers.js";
 import { DeleteIcon, EditIcon, ErrorIcon } from "../assets/icons.js";
 import { modal } from "../components/modal.js";
@@ -18,37 +17,32 @@ import { addUpdateTaskDialogBox } from "../components/add_task_dialog.js";
 export const renderDialog = function () {
 	addUpdateTaskDialogBox.innerHTML = "";
 
-	const dialogHeading = document.createElement("h2");
-	dialogHeading.innerText = window.data.isDialogForUpdate
-		? "Update Task"
-		: "Add Task";
-	setStyles(
-		{
+	const dialogHeading = createElement({
+		type: "h2",
+		innerText: window.data.isDialogForUpdate ? "Update Task" : "Add Task",
+		styles: {
 			display: "flex",
 			justifyContent: "center",
 		},
-		dialogHeading
-	);
+	});
 
-	const inputList = document.createElement("ul");
-	setStyles(
-		{
+	const inputList = createElement({
+		type: "ul",
+		styles: {
 			listStyle: "none",
 			display: "flex",
 			flexDirection: "column",
 			gap: "0.8rem",
 		},
-		inputList
-	);
+	});
 
-	const nameInpWrapper = document.createElement("li");
+	const nameInpWrapper = createElement({ type: "li" });
 
-	const taskNameLabel = document.createElement("label");
-	taskNameLabel.innerText = "Title";
+	const taskNameLabel = createElement({ type: "label", innerText: "Title" });
 
-	const taskNameInp = document.createElement("input");
-	setAttributes(
-		{
+	const taskNameInp = createElement({
+		type: "input",
+		attrs: {
 			type: "text",
 			autocomplete: true,
 			placeholder: "*required",
@@ -56,125 +50,117 @@ export const renderDialog = function () {
 				? window.tasks.list[window.tasks.updatingTaskIdx].title
 				: "",
 		},
-		taskNameInp
-	);
-	setStyles(style.addTaskInputStyle, taskNameInp);
+		styles: style.addTaskInputStyle,
+	});
 
-	taskNameInp.addEventListener("focus", (ev) => alert);
+	const deadlineInpWrapper = createElement({
+		type: "li",
+		styles: { display: "flex", flexDirection: "column", gap: "2px" },
+	});
 
-	const deadlineInpWrapper = document.createElement("li");
-	setStyles(
-		{ display: "flex", flexDirection: "column", gap: "2px" },
-		deadlineInpWrapper
-	);
+	const taskDeadlineRow = createElement({
+		type: "div",
+		styles: { display: "flex", flexDirection: "row", gap: "0.5rem" },
+	});
 
-	const taskDeadlineRow = document.createElement("div");
-	setStyles(
-		{ display: "flex", flexDirection: "row", gap: "0.5rem" },
-		taskDeadlineRow
-	);
+	const deadlineLabel = createElement({ type: "label", innerText: "Deadline" });
 
-	const deadlineLabel = document.createElement("label");
-	deadlineLabel.innerText = "Deadline";
-
-	const deadlineCheckbox = document.createElement("input");
-	setAttributes({ type: "checkbox" }, deadlineCheckbox);
+	const deadlineCheckbox = createElement({
+		type: "input",
+		attrs: { type: "checkbox" },
+		onchange: function (ev) {
+			window.addTaskData.toggleDeadline(ev.target.checked);
+			taskDeadlineInp.disabled = !ev.target.checked;
+		},
+	});
 	deadlineCheckbox.checked = window.data.isDialogForUpdate
 		? window.tasks.list[window.tasks.updatingTaskIdx].deadline !== "None"
 			? true
 			: false
 		: false;
 	window.addTaskData.toggleDeadline(deadlineCheckbox.checked);
-	deadlineCheckbox.onchange = function (ev) {
-		window.addTaskData.toggleDeadline(ev.target.checked);
-		taskDeadlineInp.disabled = !ev.target.checked;
-	};
 
-	const taskDeadlineInp = document.createElement("input");
-	setAttributes(
-		{
+	const taskDeadlineInp = createElement({
+		type: "input",
+		attrs: {
 			type: "date",
 			autocomplete: true,
 			disabled: !deadlineCheckbox.checked,
 		},
-		taskDeadlineInp
-	);
+		styles: style.addTaskInputStyle,
+		onchange: function (ev) {
+			if (new Date(ev.target.value) < new Date()) {
+				alert(
+					"Please note that deadlines cannot be set in the past. The deadline has been updated to today."
+				);
+				taskDeadlineInp.value = formatDateReversed(new Date());
+			}
+		},
+	});
 	taskDeadlineInp.disabled = !deadlineCheckbox.checked;
-	setStyles(style.addTaskInputStyle, taskDeadlineInp);
 	if (window.data.isDialogForUpdate && deadlineCheckbox.checked)
 		taskDeadlineInp.value = formatDateReversed(
 			window.tasks.list[window.tasks.updatingTaskIdx].deadline
 		);
-	taskDeadlineInp.onchange = function (ev) {
-		if (new Date(ev.target.value) < new Date()) {
-			alert(
-				"Please note that deadlines cannot be set in the past. The deadline has been updated to today."
-			);
-			taskDeadlineInp.value = formatDateReversed(new Date());
-		}
-	};
 
-	const descriptionInpWrapper = document.createElement("li");
+	const descriptionInpWrapper = createElement({ type: "li" });
 
-	const taskDescriptionLabel = document.createElement("label");
-	taskDescriptionLabel.innerText = "Description";
+	const taskDescriptionLabel = createElement({
+		type: "label",
+		innerText: "Description",
+	});
 
-	const taskDescriptionInp = document.createElement("textarea");
-	setAttributes(
-		{
+	const taskDescriptionInp = createElement({
+		type: "textarea",
+		attrs: {
 			rows: 5,
 			placeholder: "(optional)",
 		},
-		taskDescriptionInp
-	);
+		styles: style.addTaskInputStyle,
+	});
 	taskDescriptionInp.value = window.data.isDialogForUpdate
 		? window.tasks.list[window.tasks.updatingTaskIdx].description
 		: "";
-	setStyles(style.addTaskInputStyle, taskDescriptionInp);
 
-	const addTaskBtns = document.createElement("div");
-	setStyles(
-		{
+	const addTaskBtns = createElement({
+		type: "div",
+		styles: {
 			display: "flex",
 			justifyContent: "center",
 			gap: "1rem",
 		},
-		addTaskBtns
-	);
+	});
 
-	const cancelBtn = document.createElement("button");
-	cancelBtn.innerText = "Cancel";
-	setStyles(
-		{
+	const cancelBtn = createElement({
+		type: "button",
+		innerText: "Cancel",
+		styles: {
 			...style.addTaskDialogBtnsStyle,
 			backgroundColor: "black",
 		},
-		cancelBtn
-	);
-	cancelBtn.onclick = () => hideModal(modal);
+		onclick: () => hideModal(modal),
+	});
 
-	const addBtn = document.createElement("button");
-	addBtn.innerText = window.data.isDialogForUpdate ? "Update" : "Add";
-	setStyles(
-		{
+	const addBtn = createElement({
+		type: "button",
+		innerText: window.data.isDialogForUpdate ? "Update" : "Add",
+		styles: {
 			...style.addTaskDialogBtnsStyle,
-			backgroundColor: "orange",
+			backgroundColor: window.data.isDialogForUpdate ? "blue" : "orange",
 		},
-		addBtn
-	);
+		onclick: function () {
+			const data = window.addTaskData;
+			data.setTitle(taskNameInp.value);
+			data.setDeadline(data.deadlineToggle ? taskDeadlineInp.value : "None");
+			data.setDescription(taskDescriptionInp.value);
 
-	addBtn.onclick = function () {
-		const data = window.addTaskData;
-		data.setTitle(taskNameInp.value);
-		data.setDeadline(data.deadlineToggle ? taskDeadlineInp.value : "None");
-		data.setDescription(taskDescriptionInp.value);
+			if (window.data.isDialogForUpdate) data.updateTask();
+			else data.appendTask();
 
-		if (window.data.isDialogForUpdate) data.updateTask();
-		else data.appendTask();
-
-		renderTable();
-		hideModal(modal);
-	};
+			renderTable();
+			hideModal(modal);
+		},
+	});
 
 	appendChildren([taskNameLabel, taskNameInp], nameInpWrapper);
 	appendChildren([deadlineLabel, deadlineCheckbox], taskDeadlineRow);
@@ -201,7 +187,7 @@ export const renderTable = function (obj) {
 	const tasks = obj ?? tasksObj.getAll();
 
 	const taskElements = tasks.map((task, idx) => {
-		const newTask = document.createElement("tr");
+		const newTask = createElement({ type: "tr" });
 
 		const cells = [
 			task.status,
@@ -210,43 +196,49 @@ export const renderTable = function (obj) {
 			task.deadline === "None" ? task.deadline : formatDate(task.deadline),
 			task.description,
 		].map((text) => {
-			const td = document.createElement("td");
-			td.innerText = text;
-			setStyles(style.tbCellStyle, td);
+			const td = createElement({
+				type: "td",
+				innerText: text,
+				styles: style.tbCellStyle,
+			});
 			if (text === task.status && task.status === "incomplete") {
-				const statusCheckbox = document.createElement("input");
-				setAttributes({ type: "checkbox" }, statusCheckbox);
-				statusCheckbox.onchange = function (ev) {
-					window.tasks.updateStatus(idx);
-					renderTable();
-				};
+				const statusCheckbox = createElement({
+					type: "input",
+					attrs: { type: "checkbox" },
+					onchange: function (ev) {
+						window.tasks.updateStatus(idx);
+						renderTable();
+					},
+				});
 
 				appendChildren([statusCheckbox], td);
 			}
 			return td;
 		});
 
-		const editCell = document.createElement("td");
-		setStyles(style.tbCellStyle, editCell);
+		const editCell = createElement({ type: "td", styles: style.tbCellStyle });
 
-		const editBtnElem = document.createElement("button");
-		editBtnElem.innerHTML = EditIcon;
-		setStyles(style.editDelIconStyle, editBtnElem);
-		editBtnElem.onclick = function () {
-			showModal(modal, idx);
-			renderDialog();
-		};
+		const editBtnElem = createElement({
+			type: "button",
+			innerHTML: EditIcon,
+			styles: style.editDelIconStyle,
+			onclick: function () {
+				showModal(modal, idx);
+				renderDialog();
+			},
+		});
 
-		const delCell = document.createElement("td");
-		setStyles(style.tbCellStyle, delCell);
+		const delCell = createElement({ type: "td", styles: style.tbCellStyle });
 
-		const delBtnElem = document.createElement("button");
-		delBtnElem.innerHTML = DeleteIcon;
-		setStyles(style.editDelIconStyle, delBtnElem);
-		delBtnElem.onclick = function () {
-			tasksObj.delete(idx);
-			renderTable();
-		};
+		const delBtnElem = createElement({
+			type: "button",
+			innerHTML: DeleteIcon,
+			styles: style.editDelIconStyle,
+			onclick: function () {
+				tasksObj.delete(idx);
+				renderTable();
+			},
+		});
 
 		if (task.status.toLowerCase() === "incomplete")
 			appendChildren([editBtnElem], editCell);
@@ -255,28 +247,42 @@ export const renderTable = function (obj) {
 		return newTask;
 	});
 
-	const emptyTasks = document.createElement("tr");
-	const emptyTd = document.createElement("td");
-	setAttributes({ colspan: headCells.length }, emptyTd);
+	const emptyTasks = createElement({ type: "tr" });
+	const emptyTd = createElement({
+		type: "td",
+		attrs: { colspan: headCells.length },
+	});
 
-	const emptyDiv = document.createElement("div");
-	setStyles(style.emptyTasksStyle, emptyDiv);
+	const emptyDiv = createElement({
+		type: "div",
+		styles: style.emptyTasksStyle,
+	});
 
-	const emptyIcon = document.createElement("div");
-	emptyIcon.innerHTML = ErrorIcon;
-	setStyles(style.emptyIconStyle, emptyIcon);
+	const emptyIcon = createElement({
+		type: "div",
+		innerHTML: ErrorIcon,
+		styles: style.emptyIconStyle,
+	});
 
-	const emptyLabel = document.createElement("label");
-	emptyLabel.innerHTML = "No Task to display";
+	const emptyLabel = createElement({
+		type: "label",
+		innerHTML: "No Task to display",
+	});
 
-	const loadingDiv = document.createElement("div");
-	setStyles(style.loaderDivStyle, loadingDiv);
+	const loadingDiv = createElement({
+		type: "div",
+		styles: style.loaderDivStyle,
+	});
 
-	const loadingIcon = document.createElement("div");
-	setStyles(style.loadingIconStyle, loadingIcon);
+	const loadingIcon = createElement({
+		type: "div",
+		styles: style.loadingIconStyle,
+	});
 
-	const loadingLabel = document.createElement("label");
-	loadingLabel.innerText = "Loading...";
+	const loadingLabel = createElement({
+		type: "label",
+		innerText: "Loading...",
+	});
 
 	appendChildren([loadingIcon, loadingLabel], loadingDiv);
 	appendChildren([emptyIcon, emptyLabel], emptyDiv);

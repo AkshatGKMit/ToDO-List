@@ -106,3 +106,27 @@ export const formatDateReversed = function (date) {
 		.toString()
 		.padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
 };
+
+export const createElement = function ({
+	type,
+	styles,
+	attrs,
+	innerHTML,
+	innerText,
+	onclick,
+	onkeyup,
+	onchange,
+	onmouseover,
+}) {
+	const elem = document.createElement(type);
+	if (innerHTML) elem.innerHTML = innerHTML ?? "";
+	else elem.innerText = innerText ?? "";
+	setStyles(styles ?? {}, elem);
+	setAttributes(attrs ?? {}, elem);
+	elem.onclick = onclick;
+	elem.onkeyup = onkeyup;
+	elem.onchange = onchange;
+	elem.onmouseover = onmouseover;
+
+	return elem;
+};

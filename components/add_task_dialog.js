@@ -1,5 +1,7 @@
-import { setStyles } from "../helpers/helpers.js";
+import { createElement } from "../helpers/helpers.js";
 import * as style from "../styles/style.js";
 
-export const addUpdateTaskDialogBox = document.createElement("div");
-setStyles(style.taskDialogStyle, addUpdateTaskDialogBox);
+export const addUpdateTaskDialogBox = createElement({
+	type: "div",
+	styles: style.taskDialogStyle,
+});
