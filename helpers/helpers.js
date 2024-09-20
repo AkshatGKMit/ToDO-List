@@ -13,6 +13,7 @@ export const appendChildren = function (children, parent) {
 };
 
 export const showModal = function (modal, forUpdate) {
+	document.body.style.overflowY = "hidden";
 	if (forUpdate !== undefined) {
 		window.data.toggleDialogForUpdate();
 		window.tasks.setUpdatingTask(forUpdate);
@@ -26,6 +27,7 @@ export const showModal = function (modal, forUpdate) {
 export const hideModal = function (modal) {
 	if (window.data.isDialogForUpdate) window.data.toggleDialogForUpdate();
 	document.body.removeChild(modal);
+	document.body.style.overflowY = "scroll";
 };
 
 export const sortList = function (list, sortBy) {

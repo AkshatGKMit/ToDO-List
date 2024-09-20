@@ -34,6 +34,7 @@ export const addTaskInputStyle = {
 	width: "100%",
 	padding: "2px",
 	minWidth: "15rem",
+	cursor: "text",
 };
 
 export const taskDialogStyle = {
@@ -53,7 +54,7 @@ export const taskDialogStyle = {
 };
 
 export const barrierStyle = {
-	position: "absolute",
+	position: "fixed",
 	top: 0,
 	right: 0,
 	bottom: 0,
@@ -90,6 +91,7 @@ export const editDelIconStyle = {
 	backgroundColor: "transparent",
 	border: "none",
 	margin: "auto",
+	cursor: "pointer",
 };
 
 export const emptyTasksStyle = {
@@ -137,4 +139,5 @@ export const searchField = {
 	border: "none",
 	borderRadius: "20rem",
 	fontSize: "1.25rem",
+	cursor: "text",
 };

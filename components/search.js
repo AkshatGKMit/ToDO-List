@@ -7,6 +7,7 @@ export const topWrapper = createElement({
 	styles: {
 		display: "flex",
 		flexDirection: "row",
+		alignItems: "center",
 		gap: "2rem",
 	},
 });
@@ -34,6 +35,7 @@ const completedLabel = createElement({
 const completedCheckbox = createElement({
 	type: "input",
 	attrs: { type: "checkbox", checked: true },
+	styles: { cursor: "pointer" },
 	onchange: function () {
 		window.tasks.toggleCompleted();
 		renderTable();
@@ -49,6 +51,7 @@ const forgottenLabel = createElement({
 const forgottenCheckbox = createElement({
 	type: "input",
 	attrs: { type: "checkbox", checked: true },
+	styles: { cursor: "pointer" },
 	onchange: function () {
 		window.tasks.toggleForgotten();
 		renderTable();

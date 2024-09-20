@@ -9,7 +9,7 @@ export const headCells = window.data.tableHeadCellNames.map((text, idx) => {
 	const td = createElement({
 		type: "th",
 		innerText: text,
-		styles: style.tbHeadStyle,
+		styles: { ...style.tbHeadStyle, cursor: idx <= 3 ? "pointer" : "default" },
 		onclick: function () {
 			window.tasks.sort(idx);
 			renderTable();

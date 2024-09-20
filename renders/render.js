@@ -68,6 +68,7 @@ export const renderDialog = function () {
 	const deadlineCheckbox = createElement({
 		type: "input",
 		attrs: { type: "checkbox" },
+		styles: { cursor: "pointer" },
 		onchange: function (ev) {
 			window.addTaskData.toggleDeadline(ev.target.checked);
 			taskDeadlineInp.disabled = !ev.target.checked;
