@@ -25,7 +25,16 @@ window.tasks = {
 	},
 	loadAll: function () {
 		this.list = JSON.parse(localStorage.getItem("tasks")) ?? [];
-		this.list.forEach((task) => (task.date = new Date(task.date)));
+		this.list.forEach((task) => {
+			task.date = new Date(task.date);
+			if (task.deadline !== "None") {
+				task.deadline = new Date(task.deadline);
+				if (task.status === "Incomplete" && new Date() > task.deadline) {
+					task.status = "Forgotten";
+					this.save();
+				}
+			}
+		});
 		window.data.toggleLoading(false);
 	},
 	save: function () {
