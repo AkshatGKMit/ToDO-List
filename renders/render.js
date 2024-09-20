@@ -7,6 +7,8 @@ import {
 	formatDateReversed,
 	formatDate,
 	createElement,
+	dateDaysDiff,
+	setStyles,
 } from "../helpers/helpers.js";
 import { DeleteIcon, EditIcon, ErrorIcon } from "../assets/icons.js";
 import { modal } from "../components/modal.js";
@@ -90,7 +92,7 @@ export const renderDialog = function () {
 		},
 		styles: style.addTaskInputStyle,
 		onchange: function (ev) {
-			if (new Date(ev.target.value) < new Date()) {
+			if (dateDaysDiff(new Date(ev.target.value), new Date()) < 0) {
 				alert(
 					"Please note that deadlines cannot be set in the past. The deadline has been updated to today."
 				);
@@ -189,6 +191,26 @@ export const renderTable = function (obj) {
 
 	const taskElements = tasks.map((task, idx) => {
 		const newTask = createElement({ type: "tr" });
+
+		if (
+			task.status.toLowerCase() === "incomplete" &&
+			task.deadline !== "None"
+		) {
+			const daysRemaining = dateDaysDiff(task.deadline);
+
+			switch (daysRemaining) {
+				case 0:
+					setStyles({ animation: `blink0 3s infinite` }, newTask);
+					break;
+				case 1:
+					setStyles({ animation: `blink2 3s infinite` }, newTask);
+					break;
+				case 2:
+					setStyles({ animation: `blink2 3s infinite` }, newTask);
+				default:
+					break;
+			}
+		}
 
 		const cells = [
 			task.status,

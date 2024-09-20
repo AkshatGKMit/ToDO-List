@@ -132,3 +132,12 @@ export const createElement = function ({
 
 	return elem;
 };
+
+export const dateDaysDiff = function (deadline, start) {
+	const startDate = start === undefined ? new Date() : new Date(start);
+	const endDate = new Date(deadline);
+	const diffInMs = endDate - startDate;
+	const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+
+	return diffInDays;
+};
