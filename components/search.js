@@ -1,8 +1,6 @@
-import {
-	appendChildren,
-	createElement,
-} from "../helpers/helpers.js";
+import { appendChildren, createElement } from "../helpers/helpers.js";
 import { renderTable } from "../renders/render.js";
+import * as style from "../styles/style.js";
 
 export const topWrapper = createElement({
 	type: "div",
@@ -19,8 +17,9 @@ const searchField = createElement({
 		type: "text",
 		placeholder: "Search by name, dates or description",
 	},
+	styles: style.searchField,
 	onkeyup: function (ev) {
-		const searchValue = ev.target.value;
+		const searchValue = ev.target.value.toString().toLowerCase().trim();
 		const searchList = window.tasks.search(searchValue);
 		renderTable(searchList);
 	},

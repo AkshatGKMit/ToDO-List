@@ -130,3 +130,11 @@ export const loadingIconStyle = {
 	borderRadius: "10rem",
 	animation: "spin 2s linear infinite",
 };
+
+export const searchField = {
+	minWidth: "25rem",
+	padding: "0.45rem 0.75rem",
+	border: "none",
+	borderRadius: "20rem",
+	fontSize: "1.25rem",
+};

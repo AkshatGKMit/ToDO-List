@@ -60,8 +60,9 @@ window.tasks = {
 		sortList(this.list, sortBy);
 		this.save();
 	},
+	searchValue: "",
 	search: function (value) {
-		value = value.toLowerCase();
+		this.searchValue = value;
 		return this.list.reduce((acc, task) => {
 			if (
 				task.title.toLowerCase().includes(value) ||

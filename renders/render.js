@@ -195,7 +195,7 @@ export const renderTable = function (obj) {
 			formatDate(task.date),
 			task.deadline === "None" ? task.deadline : formatDate(task.deadline),
 			task.description,
-		].map((text) => {
+		].map((text, idx) => {
 			const td = createElement({
 				type: "td",
 				innerText: text,
@@ -213,6 +213,18 @@ export const renderTable = function (obj) {
 
 				appendChildren([statusCheckbox], td);
 			}
+			if (window.tasks.searchValue && idx >= 1 && idx <= 4) {
+				const content = td.innerHTML;
+				const highlightedContent = content.replace(
+					new RegExp(window.tasks.searchValue, "gi"),
+					`<span style="background-color: yellow; font-weight: 900">$&</span>`
+				);
+
+				td.innerHTML = highlightedContent;
+			} else {
+				td.innerHTML = td.textContent;
+			}
+
 			return td;
 		});
 
