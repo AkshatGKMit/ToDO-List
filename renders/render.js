@@ -15,8 +15,6 @@ import { tasksTb, headCells, tbHeadRow } from "../components/tasks.js";
 import * as style from "../styles/style.js";
 import { addUpdateTaskDialogBox } from "../components/add_task_dialog.js";
 
-//? : Deadline cannot be pervious than todays date
-//? : No edit button should be shown in completed or forgotten task
 export const renderDialog = function () {
 	addUpdateTaskDialogBox.innerHTML = "";
 
@@ -102,11 +100,19 @@ export const renderDialog = function () {
 		taskDeadlineInp
 	);
 	taskDeadlineInp.disabled = !deadlineCheckbox.checked;
+	setStyles(style.addTaskInputStyle, taskDeadlineInp);
 	if (window.data.isDialogForUpdate && deadlineCheckbox.checked)
 		taskDeadlineInp.value = formatDateReversed(
 			window.tasks.list[window.tasks.updatingTaskIdx].deadline
 		);
-	setStyles(style.addTaskInputStyle, taskDeadlineInp);
+	taskDeadlineInp.onchange = function (ev) {
+		if (new Date(ev.target.value) < new Date()) {
+			alert(
+				"Please note that deadlines cannot be set in the past. The deadline has been updated to today."
+			);
+			taskDeadlineInp.value = formatDateReversed(new Date());
+		}
+	};
 
 	const descriptionInpWrapper = document.createElement("li");
 
@@ -242,7 +248,8 @@ export const renderTable = function (obj) {
 			renderTable();
 		};
 
-		appendChildren([editBtnElem], editCell);
+		if (task.status.toLowerCase() === "incomplete")
+			appendChildren([editBtnElem], editCell);
 		appendChildren([delBtnElem], delCell);
 		appendChildren([...cells, editCell, delCell], newTask);
 		return newTask;
