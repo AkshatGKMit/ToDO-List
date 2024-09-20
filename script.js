@@ -8,5 +8,5 @@ window.onload = function () {
 	setTimeout(() => {
 		window.tasks.loadAll();
 		renderTable();
-	}, 2000);
+	}, 3000);
 };

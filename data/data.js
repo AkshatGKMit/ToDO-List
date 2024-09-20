@@ -1,4 +1,4 @@
-import { formatDate, sortList } from "../helpers/helpers.js";
+import { dateDaysDiff, formatDate, sortList } from "../helpers/helpers.js";
 import Task from "../models/task.js";
 
 window.tasks = {
@@ -29,7 +29,7 @@ window.tasks = {
 			task.date = new Date(task.date);
 			if (task.deadline !== "None") {
 				task.deadline = new Date(task.deadline);
-				if (task.status === "incomplete" && new Date() > task.deadline) {
+				if (task.status === "incomplete" && dateDaysDiff(task.deadline) < 0) {
 					task.status = "forgotten";
 					this.save();
 				}

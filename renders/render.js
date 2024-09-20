@@ -161,7 +161,6 @@ export const renderDialog = function () {
 			else data.appendTask();
 
 			renderTable();
-			console.log("Render");
 
 			renderToast(
 				window.data.isDialogForUpdate
