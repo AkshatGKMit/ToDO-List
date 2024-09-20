@@ -161,6 +161,13 @@ export const renderDialog = function () {
 			else data.appendTask();
 
 			renderTable();
+			console.log("Render");
+
+			renderToast(
+				window.data.isDialogForUpdate
+					? "Task updated successfully"
+					: "Task added successfully"
+			);
 			hideModal(modal);
 		},
 	});
@@ -224,18 +231,7 @@ export const renderTable = function (obj) {
 				innerText: text,
 				styles: style.tbCellStyle,
 			});
-			if (text === task.status && task.status === "incomplete") {
-				const statusCheckbox = createElement({
-					type: "input",
-					attrs: { type: "checkbox" },
-					onchange: function (ev) {
-						window.tasks.updateStatus(idx);
-						renderTable();
-					},
-				});
 
-				appendChildren([statusCheckbox], td);
-			}
 			if (window.tasks.searchValue && idx >= 1 && idx <= 4) {
 				const content = td.innerHTML;
 				const highlightedContent = content.replace(
@@ -246,6 +242,20 @@ export const renderTable = function (obj) {
 				td.innerHTML = highlightedContent;
 			} else {
 				td.innerHTML = td.textContent;
+			}
+
+			if (text === task.status && task.status === "incomplete") {
+				const statusCheckbox = createElement({
+					type: "input",
+					attrs: { type: "checkbox" },
+					onchange: function (ev) {
+						window.tasks.updateStatus(idx);
+						renderTable();
+						renderToast("Task Completed");
+					},
+				});
+
+				appendChildren([statusCheckbox], td);
 			}
 
 			return td;
@@ -272,6 +282,7 @@ export const renderTable = function (obj) {
 			onclick: function () {
 				tasksObj.delete(idx);
 				renderTable();
+				renderToast("Task deleted successfully");
 			},
 		});
 
@@ -327,4 +338,50 @@ export const renderTable = function (obj) {
 
 	if (!tasks.length) appendChildren([tbHeadRow, emptyTasks], tasksTb);
 	else appendChildren([tbHeadRow, ...taskElements], tasksTb);
+};
+
+export const renderToast = function (msg) {
+	const toastElem = createElement({
+		type: "div",
+		attrs: {
+			id: "toast",
+		},
+		styles: {
+			position: "absolute",
+			zIndex: 10,
+			right: 0,
+			bottom: 0,
+			left: 0,
+			height: "2.5rem",
+			width: "100%",
+			backgroundColor: "white",
+			color: "black",
+			display: "flex",
+			alignItems: "center",
+			padding: "0.25rem 0.75rem",
+		},
+		innerText: msg,
+	});
+
+	appendChildren([toastElem], document.body);
+
+	const animateToastUp = (position) => {
+		if (position <= 0) {
+			toastElem.style.bottom = `${position}rem`;
+			setTimeout(() => animateToastUp(position + 0.1), 8);
+		} else {
+			setTimeout(() => animateToastDown(0), 1500);
+		}
+	};
+
+	const animateToastDown = (position) => {
+		if (position >= -2.5) {
+			toastElem.style.bottom = `${position}rem`;
+			setTimeout(() => animateToastDown(position - 0.1), 8);
+		} else {
+			document.body.removeChild(toastElem);
+		}
+	};
+
+	animateToastUp(-2.5);
 };
