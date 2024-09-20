@@ -15,6 +15,8 @@ import { tasksTb, headCells, tbHeadRow } from "../components/tasks.js";
 import * as style from "../styles/style.js";
 import { addUpdateTaskDialogBox } from "../components/add_task_dialog.js";
 
+//? : Deadline cannot be pervious than todays date
+//? : No edit button should be shown in completed or forgotten task
 export const renderDialog = function () {
 	addUpdateTaskDialogBox.innerHTML = "";
 
@@ -205,7 +207,7 @@ export const renderTable = function (obj) {
 			const td = document.createElement("td");
 			td.innerText = text;
 			setStyles(style.tbCellStyle, td);
-			if (text === task.status && task.status === "Incomplete") {
+			if (text === task.status && task.status === "incomplete") {
 				const statusCheckbox = document.createElement("input");
 				setAttributes({ type: "checkbox" }, statusCheckbox);
 				statusCheckbox.onchange = function (ev) {

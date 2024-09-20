@@ -71,6 +71,7 @@ export const tbStyle = {
 export const tbCellStyle = {
 	border: "1px solid black",
 	padding: "0.1rem 0.5rem",
+	textTransform: "capitalize",
 };
 
 export const tbHeadStyle = {

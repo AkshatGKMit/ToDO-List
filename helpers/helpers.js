@@ -39,7 +39,7 @@ export const sortList = function (list, sortBy) {
 		const topOfList = [];
 		const bottomOfList = [];
 		list.forEach((task) => {
-			task.status === sortMethods.status[sortType]
+			task.status.toLowerCase() === sortMethods.status[sortType]
 				? topOfList.push(task)
 				: bottomOfList.push(task);
 		});
@@ -79,16 +79,16 @@ export const sortList = function (list, sortBy) {
 	}
 
 	switch (sortBy) {
-		case 1:
+		case 0:
 			sortByStatus();
 			break;
-		case 2:
+		case 1:
 			sortByName();
 			break;
-		case 3:
+		case 2:
 			sortByDate();
 			break;
-		case 4:
+		case 3:
 			sortByDeadline();
 		default:
 			break;

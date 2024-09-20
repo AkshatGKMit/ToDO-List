@@ -31,7 +31,7 @@ searchField.onkeyup = function (ev) {
 
 const showCompletedWrapper = document.createElement("div");
 const completedLabel = document.createElement("label");
-completedLabel.innerText = "Show Completed";
+completedLabel.innerText = "Show completed";
 
 const completedCheckbox = document.createElement("input");
 setAttributes({ type: "checkbox", checked: true }, completedCheckbox);
@@ -42,7 +42,7 @@ completedCheckbox.onchange = function () {
 
 const showForgottenWrapper = document.createElement("div");
 const forgottenLabel = document.createElement("label");
-forgottenLabel.innerText = "Show Forgotten";
+forgottenLabel.innerText = "Show forgotten";
 
 const forgottenCheckbox = document.createElement("input");
 setAttributes({ type: "checkbox", checked: true }, forgottenCheckbox);

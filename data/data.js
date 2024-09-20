@@ -5,15 +5,15 @@ window.tasks = {
 	list: [],
 	getAll: function () {
 		return this.list.filter((task) => {
-			const isIncomplete = task.status.toLowerCase() === "incomplete";
+			const isincomplete = task.status.toLowerCase() === "incomplete";
 			const isCompleted = task.status.toLowerCase() === "completed";
 			const isForgotten = task.status.toLowerCase() === "forgotten";
 
-			if (isIncomplete) return true;
+			if (isincomplete) return true;
 
 			if (this.showCompleted && this.showForgotten) return true;
 
-			if (!this.showCompleted && !this.showForgotten && !isIncomplete)
+			if (!this.showCompleted && !this.showForgotten && !isincomplete)
 				return false;
 
 			if (!this.showCompleted && !isCompleted) return true;
@@ -29,8 +29,8 @@ window.tasks = {
 			task.date = new Date(task.date);
 			if (task.deadline !== "None") {
 				task.deadline = new Date(task.deadline);
-				if (task.status === "Incomplete" && new Date() > task.deadline) {
-					task.status = "Forgotten";
+				if (task.status === "incomplete" && new Date() > task.deadline) {
+					task.status = "forgotten";
 					this.save();
 				}
 			}
@@ -53,7 +53,7 @@ window.tasks = {
 		this.save();
 	},
 	updateStatus: function (idx) {
-		this.list[idx].status = "Completed";
+		this.list[idx].status = "completed";
 		this.save();
 	},
 	sort: function (sortBy) {
@@ -114,7 +114,7 @@ window.data = {
 		"Delete",
 	],
 	sortMethods: {
-		status: ["Completed", "Incomplete", "Forgotten"],
+		status: ["completed", "incomplete", "forgotten"],
 		name: ["Ascending", "Descending"],
 		date: ["Ascending", "Descending"],
 		deadline: ["Closest", "Farthest"],
