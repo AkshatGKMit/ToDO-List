@@ -16,7 +16,7 @@ const searchField = createElement({
 	type: "input",
 	attrs: {
 		type: "text",
-		placeholder: "Search by name, dates or description",
+		placeholder: "Search by name, date or description",
 	},
 	styles: style.searchField,
 	onkeyup: function (ev) {

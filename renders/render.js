@@ -140,6 +140,7 @@ export const renderDialog = function () {
 		styles: {
 			...style.addTaskDialogBtnsStyle,
 			backgroundColor: "black",
+			cursor: "pointer",
 		},
 		onclick: () => hideModal(modal),
 	});
@@ -150,24 +151,29 @@ export const renderDialog = function () {
 		styles: {
 			...style.addTaskDialogBtnsStyle,
 			backgroundColor: window.data.isDialogForUpdate ? "blue" : "orange",
+			cursor: "pointer",
 		},
 		onclick: function () {
 			const data = window.addTaskData;
-			data.setTitle(taskNameInp.value);
-			data.setDeadline(data.deadlineToggle ? taskDeadlineInp.value : "None");
-			data.setDescription(taskDescriptionInp.value);
+			if (taskNameInp.value.trim() !== "") {
+				data.setTitle(taskNameInp.value);
+				data.setDeadline(data.deadlineToggle ? taskDeadlineInp.value : "None");
+				data.setDescription(taskDescriptionInp.value);
 
-			if (window.data.isDialogForUpdate) data.updateTask();
-			else data.appendTask();
+				if (window.data.isDialogForUpdate) data.updateTask();
+				else data.appendTask();
 
-			renderTable();
+				renderTable();
 
-			renderToast(
-				window.data.isDialogForUpdate
-					? "Task updated successfully"
-					: "Task added successfully"
-			);
-			hideModal(modal);
+				renderToast(
+					window.data.isDialogForUpdate
+						? "Task updated successfully"
+						: "Task added successfully"
+				);
+				hideModal(modal);
+			} else {
+				renderToast("Task title cannot be empty");
+			}
 		},
 	});
 
