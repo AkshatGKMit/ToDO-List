@@ -12,6 +12,12 @@ body {
   gap: 1rem;
 }
 
+header {
+  display: flex;
+  justify-content: center;
+  margin: 0.25rem 1rem;
+}
+
 #floating-action-btn {
   position: fixed;
   bottom: 0;
