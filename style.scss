@@ -87,6 +87,34 @@ header {
 	}
 }
 
+.modal {
+	.barrier {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba($color: #333, $alpha: 0.5);
+		z-index: 2;
+	}
+
+	.dialog-box {
+		position: absolute;
+		z-index: 3;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		height: fit-content;
+		width: fit-content;
+		padding: 1rem;
+		background-color: #fff;
+		border-radius: 10px;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+}
+
 @keyframes spin {
 	0% {
 		transform: rotate(0deg);
