@@ -18,7 +18,7 @@ export function closeModal() {
 	document.body.style.overflowY = "scroll";
 }
 
-floatingActionBtn.addEventListener("click", showModal);
+floatingActionBtn.addEventListener("click", () => showModal());
 modalBarrier.addEventListener("click", closeModal);
 modalCloseBtn.addEventListener("click", closeModal);
 modalCancelBtn.addEventListener("click", closeModal);

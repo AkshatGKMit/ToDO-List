@@ -54,7 +54,6 @@ function showTableData(tasks) {
 			task.priority === 0 ? "high" : task.priority === 1 ? "medium" : "low",
 			task.status,
 			task.name,
-			task.deadline,
 		].map((text, idx) => {
 			const td = createElement({
 				type: "td",
@@ -100,7 +99,7 @@ function showTableData(tasks) {
                 <button class="cell-icon">${EditIcon}</button>
             `,
 			onclick: function () {
-				showModal(idx);
+				showModal(rowIdx);
 				renderTable();
 			},
 		});
@@ -114,7 +113,7 @@ function showTableData(tasks) {
             <button class="cell-icon">${DeleteIcon}</button>
             `,
 			onclick: function () {
-				window.tasks.delete(idx);
+				window.tasks.delete(rowIdx);
 				renderTable();
 			},
 		});

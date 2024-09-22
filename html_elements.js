@@ -14,15 +14,6 @@ export const modalCancelBtn = document.getElementById("cancel-btn");
 export const dialogHeading = document.getElementById("dialog-heading");
 export const taskNameInp = document.getElementById("task-name-inp");
 export const taskPrioritySelector = document.getElementById("priority-select");
-export const taskDeadlineCb = document.getElementById(
-	"task-deadline-checkbox-inp"
-);
-export const taskDeadlineDateInp = document.getElementById(
-	"task-deadline-date-inp"
-);
-export const taskDeadlineTimeInp = document.getElementById(
-	"task-deadline-time-inp"
-);
 export const taskDescriptionInp = document.getElementById(
 	"task-description-inp"
 );

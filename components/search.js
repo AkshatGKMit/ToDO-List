@@ -6,13 +6,7 @@ function search(ev) {
 
 	window.tasks.searchValue = searchValue;
 	const searchList = window.tasks.getAll().reduce((acc, task) => {
-		if (
-			task.name.toLowerCase().includes(searchValue) ||
-			(!task.deadline
-				? "none".includes(searchValue)
-				: task.date.includes(searchValue) || task.time.includes(searchValue))
-		)
-			acc.push(task);
+		if (task.name.toLowerCase().includes(searchValue)) acc.push(task);
 
 		return acc;
 	}, []);
