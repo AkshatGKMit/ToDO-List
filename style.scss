@@ -54,8 +54,9 @@ input[type="text"] {
 
 #tasks-tb {
 	margin: 0 auto;
-	border: 1px solid black;
+	border: none;
 	border-collapse: collapse;
+	min-width: 75rem;
 
 	#head-row {
 		text-align: center;
@@ -69,6 +70,56 @@ input[type="text"] {
 
 	.tb-head-item {
 		padding: 0.25rem 1rem;
+	}
+
+	.rows:nth-child(odd) {
+		background-color: rgba($color: orange, $alpha: 0.15);
+	}
+	.rows:nth-child(even) {
+		background-color: rgba($color: blue, $alpha: 0.15);
+	}
+
+	#empty-row {
+		background-color: rgba($color: pink, $alpha: 0.5);
+
+		label {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			gap: 1rem;
+			margin: 3rem;
+			font-size: 2rem;
+			font-weight: 900;
+			color: #808080;
+		}
+	}
+
+	#loading-row {
+		background-color: rgba($color: yellow, $alpha: 0.25);
+
+		.loader-wrapper {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			gap: 1rem;
+			margin: 3rem;
+			font-size: 2rem;
+			font-weight: 900;
+			color: black;
+
+			.loader-icon {
+				height: 6rem;
+				width: 6rem;
+				border: 10px solid black;
+				border-top-color: transparent;
+				border-radius: 10rem;
+				animation: spin 2s linear infinite;
+			}
+		}
 	}
 }
 

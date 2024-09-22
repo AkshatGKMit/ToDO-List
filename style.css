@@ -52,8 +52,9 @@ input[type=text] {
 
 #tasks-tb {
   margin: 0 auto;
-  border: 1px solid black;
+  border: none;
   border-collapse: collapse;
+  min-width: 75rem;
 }
 #tasks-tb #head-row {
   text-align: center;
@@ -66,6 +67,50 @@ input[type=text] {
 }
 #tasks-tb .tb-head-item {
   padding: 0.25rem 1rem;
+}
+#tasks-tb .rows:nth-child(odd) {
+  background-color: rgba(255, 165, 0, 0.15);
+}
+#tasks-tb .rows:nth-child(even) {
+  background-color: rgba(0, 0, 255, 0.15);
+}
+#tasks-tb #empty-row {
+  background-color: rgba(255, 192, 203, 0.5);
+}
+#tasks-tb #empty-row label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  margin: 3rem;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #808080;
+}
+#tasks-tb #loading-row {
+  background-color: rgba(255, 255, 0, 0.25);
+}
+#tasks-tb #loading-row .loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  margin: 3rem;
+  font-size: 2rem;
+  font-weight: 900;
+  color: black;
+}
+#tasks-tb #loading-row .loader-wrapper .loader-icon {
+  height: 6rem;
+  width: 6rem;
+  border: 10px solid black;
+  border-top-color: transparent;
+  border-radius: 10rem;
+  animation: spin 2s linear infinite;
 }
 
 #floating-action-btn {

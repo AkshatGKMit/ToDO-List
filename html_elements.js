@@ -1,3 +1,7 @@
+export const table = document.getElementById("tasks-tb");
+export const tbHeadRow = document.getElementById("head-row");
+
+//* ------------------>
 export const floatingActionBtn = document.getElementById("floating-action-btn");
 export const modal = document.getElementById("modal");
 export const modalBarrier = document.getElementById("barrier");
