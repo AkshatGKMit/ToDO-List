@@ -91,6 +91,10 @@ function showTableData(tasks) {
 			innerHTML: `
             <button class="cell-icon">${DeleteIcon}</button>
             `,
+			onclick: function () {
+				window.tasks.delete(idx);
+				renderTable();
+			},
 		});
 
 		appendChildren([...cells, editCell, delCell], taskEle);

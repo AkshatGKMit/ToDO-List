@@ -21,6 +21,10 @@ window.tasks = {
 	add: function (newTask) {
 		this.list.push(newTask);
 	},
+	delete: function (idx) {
+		this.list = this.list.filter((_, i) => i !== idx);
+    },
+    searchValue: "",
 	searchList: [],
 };
 
