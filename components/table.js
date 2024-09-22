@@ -1,3 +1,4 @@
+import { DeleteIcon, EditIcon } from "../assets/icons.js";
 import { appendChildren, createElement } from "../helpers/helpers.js";
 import { table, tbHeadRow } from "../html_elements.js";
 
@@ -45,17 +46,54 @@ function showTableData(tasks) {
 			attrs: {
 				class: "data-rows",
 			},
+		});
+
+		const cells = [task.priority, task.status, task.name, task.deadline].map(
+			(text, idx) => {
+				const td = createElement({
+					type: "td",
+					attrs: { class: "row-data" },
+					innerText:
+						idx === 3 ? (text ? task.date + " " + task.time : "none") : text,
+				});
+
+				if (window.tasks.searchValue && idx >= 2 && idx <= 3) {
+					const content = td.innerHTML;
+					const highlightedContent = content.replace(
+						new RegExp(window.tasks.searchValue, "gi"),
+						`<span style="background-color: yellow; font-weight: 900">$&</span>`
+					);
+
+					td.innerHTML = highlightedContent;
+				} else {
+					td.innerHTML = td.textContent;
+				}
+
+				return td;
+			}
+		);
+
+		const editCell = createElement({
+			type: "td",
+			attrs: {
+				class: "row-data",
+			},
 			innerHTML: `
-                <td class="row-data">${task.priority}</td>
-                <td class="row-data">${task.status}</td>
-                <td class="row-data">${task.name}</td>
-                <td class="row-data">${
-									task.deadline ? task.date + " " + task.time : "none"
-								}</td>
-                <td class="row-data">✏️</td>
-                <td class="row-data">🗑️</td>
+            <button class="cell-icon">${EditIcon}</button>
             `,
 		});
+
+		const delCell = createElement({
+			type: "td",
+			attrs: {
+				class: "row-data",
+			},
+			innerHTML: `
+            <button class="cell-icon">${DeleteIcon}</button>
+            `,
+		});
+
+		appendChildren([...cells, editCell, delCell], taskEle);
 
 		allTasksElem.push(taskEle);
 	});
@@ -66,7 +104,12 @@ function showTableData(tasks) {
 export const renderTable = function (isLoading) {
 	table.innerHTML = "";
 
-	const tasks = window.tasks.getAll();
+	const tasks =
+		window.tasks.searchList.length === 0
+			? window.tasks.searchValue === ""
+				? window.tasks.getAll()
+				: []
+			: window.tasks.searchList;
 
 	if (isLoading) {
 		appendChildren([tbHeadRow, loadingData()], table);

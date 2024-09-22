@@ -87,6 +87,15 @@ input[type="text"] {
 		background-color: rgba($color: blue, $alpha: 0.15);
 	}
 
+	.cell-icon {
+		display: block;
+		height: 1.75rem;
+		width: 1.75rem;
+		background-color: transparent;
+		border: none;
+		margin: auto;
+	}
+
 	#empty-row {
 		background-color: rgba($color: pink, $alpha: 0.5);
 

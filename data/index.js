@@ -7,14 +7,21 @@ window.tasks = {
 			deadline: false,
 			description: "Just Eat",
 		},
+		{
+			priority: "Medium",
+			status: "incomplete",
+			name: "Sleep",
+			deadline: false,
+			description: "8hrs Sleep",
+		},
 	],
 	getAll: function () {
 		return this.list;
 	},
 	add: function (newTask) {
 		this.list.push(newTask);
-		console.log(this.list);
 	},
+	searchList: [],
 };
 
 window.data = {

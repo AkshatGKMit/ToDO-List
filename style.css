@@ -80,6 +80,14 @@ input[type=text] {
 #tasks-tb .data-rows:nth-child(even) {
   background-color: rgba(0, 0, 255, 0.15);
 }
+#tasks-tb .cell-icon {
+  display: block;
+  height: 1.75rem;
+  width: 1.75rem;
+  background-color: transparent;
+  border: none;
+  margin: auto;
+}
 #tasks-tb #empty-row {
   background-color: rgba(255, 192, 203, 0.5);
 }

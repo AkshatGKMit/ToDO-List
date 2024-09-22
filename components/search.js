@@ -1,66 +1,24 @@
-import { appendChildren, createElement } from "../helpers/helpers.js";
-import { renderTable } from "../renders/render.js";
-import * as style from "../styles/style.js";
+import { searchField } from "../html_elements.js";
+import { renderTable } from "./table.js";
 
-export const topWrapper = createElement({
-	type: "div",
-	styles: {
-		display: "flex",
-		flexDirection: "row",
-		alignItems: "center",
-		gap: "2rem",
-	},
-});
+function search(ev) {
+	const searchValue = ev.target.value.toString().toLowerCase().trim();
 
-const searchField = createElement({
-	type: "input",
-	attrs: {
-		type: "text",
-		placeholder: "Search by name, date or description",
-	},
-	styles: style.searchField,
-	onkeyup: function (ev) {
-		const searchValue = ev.target.value.toString().toLowerCase().trim();
-		const searchList = window.tasks.search(searchValue);
-		renderTable(searchList);
-	},
-});
+	window.tasks.searchValue = searchValue;
+	const searchList = window.tasks.getAll().reduce((acc, task) => {
+		if (
+			task.name.toLowerCase().includes(searchValue) ||
+			(!task.deadline
+				? "none".includes(searchValue)
+				: task.date.includes(searchValue) || task.time.includes(searchValue))
+		)
+			acc.push(task);
 
-const showCompletedWrapper = createElement({ type: "div" });
-const completedLabel = createElement({
-	type: "label",
-	innerText: "Show completed",
-});
+		return acc;
+	}, []);
 
-const completedCheckbox = createElement({
-	type: "input",
-	attrs: { type: "checkbox", checked: true },
-	styles: { cursor: "pointer" },
-	onchange: function () {
-		window.tasks.toggleCompleted();
-		renderTable();
-	},
-});
+	window.tasks.searchList = searchList;
+	renderTable();
+}
 
-const showForgottenWrapper = createElement({ type: "div" });
-const forgottenLabel = createElement({
-	type: "label",
-	innerText: "Show forgotten",
-});
-
-const forgottenCheckbox = createElement({
-	type: "input",
-	attrs: { type: "checkbox", checked: true },
-	styles: { cursor: "pointer" },
-	onchange: function () {
-		window.tasks.toggleForgotten();
-		renderTable();
-	},
-});
-
-appendChildren([completedLabel, completedCheckbox], showCompletedWrapper);
-appendChildren([forgottenLabel, forgottenCheckbox], showForgottenWrapper);
-appendChildren(
-	[searchField, showCompletedWrapper, showForgottenWrapper],
-	topWrapper
-);
+searchField.addEventListener("keyup", search);

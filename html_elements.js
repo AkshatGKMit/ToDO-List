@@ -1,3 +1,5 @@
+export const searchField = document.getElementById("search-field")
+
 export const table = document.getElementById("tasks-tb");
 export const tbHeadRow = document.getElementById("head-row");
 
