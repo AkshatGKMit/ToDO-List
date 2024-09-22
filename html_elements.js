@@ -1,4 +1,5 @@
-export const searchField = document.getElementById("search-field")
+export const searchField = document.getElementById("search-field");
+export const sortBtn = document.getElementById("sort-select");
 
 export const table = document.getElementById("tasks-tb");
 export const tbHeadRow = document.getElementById("head-row");

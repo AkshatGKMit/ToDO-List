@@ -50,30 +50,33 @@ function showTableData(tasks) {
 			},
 		});
 
-		const cells = [task.priority, task.status, task.name, task.deadline].map(
-			(text, idx) => {
-				const td = createElement({
-					type: "td",
-					attrs: { class: "row-data" },
-					innerText:
-						idx === 3 ? (text ? task.date + " " + task.time : "none") : text,
-				});
+		const cells = [
+			task.priority === 0 ? "high" : task.priority === 1 ? "medium" : "low",
+			task.status,
+			task.name,
+			task.deadline,
+		].map((text, idx) => {
+			const td = createElement({
+				type: "td",
+				attrs: { class: "row-data" },
+				innerText:
+					idx === 3 ? (text ? task.date + " " + task.time : "none") : text,
+			});
 
-				if (window.tasks.searchValue && idx >= 2 && idx <= 3) {
-					const content = td.innerHTML;
-					const highlightedContent = content.replace(
-						new RegExp(window.tasks.searchValue, "gi"),
-						`<span style="background-color: yellow; font-weight: 900">$&</span>`
-					);
+			if (window.tasks.searchValue && idx >= 2 && idx <= 3) {
+				const content = td.innerHTML;
+				const highlightedContent = content.replace(
+					new RegExp(window.tasks.searchValue, "gi"),
+					`<span style="background-color: yellow; font-weight: 900">$&</span>`
+				);
 
-					td.innerHTML = highlightedContent;
-				} else {
-					td.innerHTML = td.textContent;
-				}
-
-				return td;
+				td.innerHTML = highlightedContent;
+			} else {
+				td.innerHTML = td.textContent;
 			}
-		);
+
+			return td;
+		});
 
 		const editCell = createElement({
 			type: "td",

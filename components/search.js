@@ -1,4 +1,4 @@
-import { searchField } from "../html_elements.js";
+import { searchField, sortBtn } from "../html_elements.js";
 import { renderTable } from "./table.js";
 
 function search(ev) {
@@ -22,3 +22,10 @@ function search(ev) {
 }
 
 searchField.addEventListener("keyup", search);
+
+function sort(ev) {
+	window.tasks.sort(parseInt(ev.target.value));
+	renderTable();
+}
+
+sortBtn.addEventListener("change", sort);

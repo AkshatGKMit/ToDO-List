@@ -12,88 +12,34 @@ export const appendChildren = function (children, parent) {
 	});
 };
 
-export const showModal = function (modal, forUpdate) {
-	document.body.style.overflowY = "hidden";
-	if (forUpdate !== undefined) {
-		window.data.toggleDialogForUpdate();
-		window.tasks.setUpdatingTask(forUpdate);
-	} else {
-		window.tasks.setUpdatingTask(-1);
-	}
+export const sortList = function (sortBy) {
+	const tasks =
+		window.tasks.searchValue === ""
+			? window.tasks.list
+			: window.tasks.searchList;
 
-	appendChildren([modal], document.body);
-};
-
-export const hideModal = function (modal) {
-	if (window.data.isDialogForUpdate) window.data.toggleDialogForUpdate();
-	document.body.removeChild(modal);
-	document.body.style.overflowY = "scroll";
-};
-
-export const sortList = function (list, sortBy) {
-	const sortOrder = window.data.sortOrder;
-	const sortMethods = window.data.sortMethods;
-
-	function sortByStatus() {
-		const sortType = (window.data.sortOrder.status =
-			(sortOrder.status + 1) % 3);
-
-		const topOfList = [];
-		const bottomOfList = [];
-		list.forEach((task) => {
-			task.status.toLowerCase() === sortMethods.status[sortType]
-				? topOfList.push(task)
-				: bottomOfList.push(task);
-		});
-		window.tasks.list = [...topOfList, ...bottomOfList];
-	}
-
-	function sortByName() {
-		const sortType = (window.data.sortOrder.name = (sortOrder.name + 1) % 2);
-		window.tasks.list = list.sort((a, b) => {
-			return sortType
-				? a.title.localeCompare(b.title)
-				: b.title.localeCompare(a.title);
-		});
-	}
-
-	function sortByDate() {
-		const sortType = (window.data.sortOrder.date = (sortOrder.date + 1) % 2);
-		window.tasks.list = list.sort((a, b) => {
-			return sortType ? a.date - b.date : b.date - a.date;
-		});
-	}
-
-	function sortByDeadline() {
-		const sortType = (window.data.sortOrder.date = (sortOrder.date + 1) % 2);
-		const upcoming = [];
-		const passed = [];
-		list.forEach((task) => {
-			task.status === sortMethods.status[1]
-				? upcoming.push(task)
-				: passed.push(task);
-		});
-
-		const newUpcoming = upcoming.sort((a, b) => {
-			return sortType ? a.date - b.date : b.date - a.date;
-		});
-		window.tasks.list = [...newUpcoming, ...passed];
-	}
+	let sortedList = [];
 
 	switch (sortBy) {
 		case 0:
-			sortByStatus();
+			sortedList = tasks.sort((a, b) => a.priority - b.priority);
 			break;
 		case 1:
-			sortByName();
+			sortedList = tasks.sort((a, b) => b.priority - a.priority);
 			break;
 		case 2:
-			sortByDate();
+			sortedList = tasks.sort((a, b) => a.name.localeCompare(b.name));
 			break;
 		case 3:
-			sortByDeadline();
+			sortedList = tasks.sort((a, b) => b.name.localeCompare(a.name));
 		default:
 			break;
+	}
+
+	if (window.tasks.searchValue === "") {
+		window.tasks.searchList = sortedList;
+	} else {
+		window.tasks.list = sortedList;
 	}
 };
 

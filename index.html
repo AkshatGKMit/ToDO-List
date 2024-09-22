@@ -17,7 +17,16 @@
 					id="search-field"
 					placeholder="Search by name, date or description"
 				/>
-				<button type="button" id="filter-btn">Filters</button>
+				<div class="wrapper">
+					<select id="sort-select">
+						<option value="" selected disabled>--Sort By--</option>
+						<option value="0">Priority (High to Low)</option>
+						<option value="1">Priority (Low to High)</option>
+						<option value="2">Name(Asc)</option>
+						<option value="3">Name(Dsc)</option>
+					</select>
+					<button type="button" id="filter-btn">Filters</button>
+				</div>
 			</section>
 			<section class="table-section">
 				<table id="tasks-tb">
@@ -70,9 +79,9 @@
 								<option value="" class="priority-options" selected disabled>
 									--Select Priority--
 								</option>
-								<option value="high" class="priority-options">High</option>
-								<option value="medium" class="priority-options">Medium</option>
-								<option value="low" class="priority-options">Low</option>
+								<option value="0" class="priority-options">High</option>
+								<option value="1" class="priority-options">Medium</option>
+								<option value="2" class="priority-options">Low</option>
 							</select>
 						</li>
 						<li class="task-input-wrapper">
