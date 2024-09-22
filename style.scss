@@ -12,6 +12,12 @@ body {
 	gap: 1rem;
 }
 
+main {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
 header {
 	display: flex;
 	justify-content: center;
