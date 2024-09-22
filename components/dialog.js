@@ -10,6 +10,7 @@ import {
 } from "../html_elements.js";
 import Task from "../models/task.js";
 import { closeModal } from "./modal.js";
+import { renderTable } from "./table.js";
 
 export const renderDialog = function (updateIdx = -1) {
 	const updatingTask = updateIdx < 0 ? null : window.tasks.list[updateIdx];
@@ -37,7 +38,7 @@ export const renderDialog = function (updateIdx = -1) {
 
 	function appendTask() {
 		const priority = taskPrioritySelector.value;
-		const title = taskNameInp.value;
+		const name = taskNameInp.value;
 		const deadline = taskDeadlineCb.checked;
 		const date = taskDeadlineCb.checked ? taskDeadlineDateInp.value : "none";
 		const time = taskDeadlineCb.checked ? taskDeadlineTimeInp.value : "none";
@@ -45,19 +46,40 @@ export const renderDialog = function (updateIdx = -1) {
 
 		Task.add({
 			priority,
-			title,
+			name,
 			deadline,
 			date,
 			time,
 			description,
 		});
 		closeModal();
+		renderTable();
 	}
 
-	function updateTask() {}
+	function updateTask() {
+		const priority = taskPrioritySelector.value;
+		const name = taskNameInp.value;
+		const deadline = taskDeadlineCb.checked;
+		const date = taskDeadlineCb.checked ? taskDeadlineDateInp.value : "none";
+		const time = taskDeadlineCb.checked ? taskDeadlineTimeInp.value : "none";
+		const description = taskDescriptionInp.value;
 
-	dialogActionBtn.addEventListener(
-		"click",
-		updatingTask === null ? appendTask : updateTask
-	);
+		Task.update({
+			idx: updateIdx,
+			priority,
+			name,
+			deadline,
+			date,
+			time,
+			description,
+		});
+
+		closeModal();
+		renderTable();
+	}
+
+	dialogActionBtn.innerText = updatingTask === null ? "Add" : "Update";
+	dialogActionBtn.addEventListener("click", () => {
+		updatingTask === null ? appendTask() : updateTask();
+	});
 };

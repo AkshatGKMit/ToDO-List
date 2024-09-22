@@ -1,14 +1,14 @@
 window.tasks = {
 	list: [
 		{
-			priority: "Low",
+			priority: "low",
 			status: "incomplete",
 			name: "Eat",
 			deadline: false,
 			description: "Just Eat",
 		},
 		{
-			priority: "Medium",
+			priority: "medium",
 			status: "incomplete",
 			name: "Sleep",
 			deadline: false,
@@ -21,10 +21,13 @@ window.tasks = {
 	add: function (newTask) {
 		this.list.push(newTask);
 	},
+	update: function (task, idx) {
+		this.list[idx] = task;
+	},
 	delete: function (idx) {
 		this.list = this.list.filter((_, i) => i !== idx);
-    },
-    searchValue: "",
+	},
+	searchValue: "",
 	searchList: [],
 };
 

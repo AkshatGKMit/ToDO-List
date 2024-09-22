@@ -1,6 +1,8 @@
 import { DeleteIcon, EditIcon } from "../assets/icons.js";
 import { appendChildren, createElement } from "../helpers/helpers.js";
 import { table, tbHeadRow } from "../html_elements.js";
+import { renderDialog } from "./dialog.js";
+import { showModal } from "./modal.js";
 
 function loadingData() {
 	const loadingRow = createElement({
@@ -79,8 +81,12 @@ function showTableData(tasks) {
 				class: "row-data",
 			},
 			innerHTML: `
-            <button class="cell-icon">${EditIcon}</button>
+                <button class="cell-icon">${EditIcon}</button>
             `,
+			onclick: function () {
+				showModal(idx);
+				renderTable();
+			},
 		});
 
 		const delCell = createElement({

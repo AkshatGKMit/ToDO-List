@@ -7,10 +7,10 @@ import {
 } from "../html_elements.js";
 import { renderDialog } from "./dialog.js";
 
-export function showModal() {
+export function showModal(idx) {
 	modal.style.display = "block";
 	document.body.style.overflowY = "hidden";
-	renderDialog();
+	renderDialog(idx);
 }
 
 export function closeModal() {
