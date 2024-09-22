@@ -52,6 +52,26 @@ input[type="text"] {
 	}
 }
 
+#tasks-tb {
+	margin: 0 auto;
+	border: 1px solid black;
+	border-collapse: collapse;
+
+	#head-row {
+		text-align: center;
+		color: white;
+		background-color: black;
+		padding: 0.2rem 1rem;
+		border-color: grey;
+		text-transform: capitalize;
+		width: 100%;
+	}
+
+	.tb-head-item {
+		padding: 0.25rem 1rem;
+	}
+}
+
 #floating-action-btn {
 	position: fixed;
 	bottom: 0;
