@@ -1,10 +1,18 @@
 class Task {
-	constructor({ title, description, deadline }) {
+	constructor(priority, title, deadline, description, date, time) {
+		this.priority = priority;
+		this.status = window.data.status[0];
 		this.title = title;
-		this.description = description;
-		this.status = window.data.sortMethods.status[1];
-		this.deadline = deadline === "None" ? "None" : new Date(deadline);
 		this.date = new Date();
+		this.deadline = deadline;
+		this.dlDate = date;
+		this.dlTime = time;
+		this.description = description;
+	}
+
+	static add({ priority, title, description, deadline, date, time }) {
+		const newTask = new Task(priority, title, deadline, description, date, time);
+		window.tasks.add(newTask)
 	}
 }
 

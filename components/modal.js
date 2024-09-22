@@ -5,15 +5,15 @@ import {
 	modalCloseBtn,
 	modalCancelBtn,
 } from "../html_elements.js";
+import { renderDialog } from "./dialog.js";
 
-let isDialogForAdd = true;
-
-function showModal() {
+export function showModal() {
 	modal.style.display = "block";
 	document.body.style.overflowY = "hidden";
+	renderDialog();
 }
 
-function closeModal() {
+export function closeModal() {
 	modal.style.display = "none";
 	document.body.style.overflowY = "scroll";
 }
