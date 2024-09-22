@@ -42,7 +42,7 @@ function emptyTableData() {
 function showTableData(tasks) {
 	const allTasksElem = [];
 
-	tasks.forEach((task, idx) => {
+	tasks.forEach((task, rowIdx) => {
 		const taskEle = createElement({
 			type: "tr",
 			attrs: {
@@ -73,6 +73,19 @@ function showTableData(tasks) {
 				td.innerHTML = highlightedContent;
 			} else {
 				td.innerHTML = td.textContent;
+			}
+
+			if (text === task.status && task.status === "incomplete") {
+				const statusCheckbox = createElement({
+					type: "input",
+					attrs: { type: "checkbox" },
+					onchange: function () {
+						window.tasks.updateStatus(rowIdx);
+						renderTable();
+					},
+				});
+
+				appendChildren([statusCheckbox], td);
 			}
 
 			return td;

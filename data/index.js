@@ -82,6 +82,9 @@ window.tasks = {
 	update: function (task, idx) {
 		this.list[idx] = task;
 	},
+    updateStatus: function (idx) {
+		this.list[idx].status = window.data.status[1];
+	},
 	delete: function (idx) {
 		this.list = this.list.filter((_, i) => i !== idx);
 	},
