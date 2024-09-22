@@ -7,6 +7,8 @@ export const setAttributes = function (attrs, element) {
 };
 
 export const appendChildren = function (children, parent) {
+	console.log(children);
+
 	children.forEach((child) => {
 		parent.appendChild(child);
 	});

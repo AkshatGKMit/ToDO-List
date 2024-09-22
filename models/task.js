@@ -11,8 +11,15 @@ class Task {
 	}
 
 	static add({ priority, title, description, deadline, date, time }) {
-		const newTask = new Task(priority, title, deadline, description, date, time);
-		window.tasks.add(newTask)
+		const newTask = new Task(
+			priority,
+			title,
+			deadline,
+			description,
+			date,
+			time
+		);
+		window.tasks.add(newTask);
 	}
 }
 

@@ -1,5 +1,13 @@
 window.tasks = {
-	list: [],
+	list: [
+		{
+			priority: "Low",
+			status: "incomplete",
+			name: "Eat",
+			deadline: false,
+			description: "Just Eat",
+		},
+	],
 	getAll: function () {
 		return this.list;
 	},

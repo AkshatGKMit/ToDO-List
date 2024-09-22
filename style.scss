@@ -58,24 +58,32 @@ input[type="text"] {
 	border-collapse: collapse;
 	min-width: 75rem;
 
-	#head-row {
+	th,
+	td {
 		text-align: center;
+		text-transform: capitalize;
+		padding: 0.1rem 0.5rem;
+	}
+
+	.rows {
+		width: 100%;
+	}
+
+	#head-row {
 		color: white;
 		background-color: black;
-		padding: 0.2rem 1rem;
 		border-color: grey;
 		text-transform: capitalize;
-		width: 100%;
 	}
 
 	.tb-head-item {
 		padding: 0.25rem 1rem;
 	}
 
-	.rows:nth-child(odd) {
+	.data-rows:nth-child(odd) {
 		background-color: rgba($color: orange, $alpha: 0.15);
 	}
-	.rows:nth-child(even) {
+	.data-rows:nth-child(even) {
 		background-color: rgba($color: blue, $alpha: 0.15);
 	}
 

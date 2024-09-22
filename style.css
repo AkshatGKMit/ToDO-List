@@ -56,22 +56,28 @@ input[type=text] {
   border-collapse: collapse;
   min-width: 75rem;
 }
-#tasks-tb #head-row {
+#tasks-tb th,
+#tasks-tb td {
   text-align: center;
+  text-transform: capitalize;
+  padding: 0.1rem 0.5rem;
+}
+#tasks-tb .rows {
+  width: 100%;
+}
+#tasks-tb #head-row {
   color: white;
   background-color: black;
-  padding: 0.2rem 1rem;
   border-color: grey;
   text-transform: capitalize;
-  width: 100%;
 }
 #tasks-tb .tb-head-item {
   padding: 0.25rem 1rem;
 }
-#tasks-tb .rows:nth-child(odd) {
+#tasks-tb .data-rows:nth-child(odd) {
   background-color: rgba(255, 165, 0, 0.15);
 }
-#tasks-tb .rows:nth-child(even) {
+#tasks-tb .data-rows:nth-child(even) {
   background-color: rgba(0, 0, 255, 0.15);
 }
 #tasks-tb #empty-row {
