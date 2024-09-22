@@ -1,12 +1,2 @@
-"use strict";
-
-import { body } from "./components/index.js";
-import { renderTable } from "./renders/render.js";
-
-window.onload = function () {
-	renderTable();
-	setTimeout(() => {
-		window.tasks.loadAll();
-		renderTable();
-	}, 3000);
-};
+import "./html_elements.js";
+import "./components/modal.js";

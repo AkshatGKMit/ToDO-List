@@ -1,16 +1,24 @@
 import {
-	hideModal,
-	appendChildren,
-	createElement,
-} from "../helpers/helpers.js";
-import * as style from "../styles/style.js";
-import { addUpdateTaskDialogBox } from "./add_task_dialog.js";
+	modal,
+	floatingActionBtn,
+	modalBarrier,
+	modalCloseBtn,
+	modalCancelBtn,
+} from "../html_elements.js";
 
-export const modal = createElement({ type: "div" });
-const barrier = createElement({
-	type: "div",
-	styles: style.barrierStyle,
-	onclick: () => hideModal(modal),
-});
+let isDialogForAdd = true;
 
-appendChildren([barrier, addUpdateTaskDialogBox], modal);
+function showModal() {
+	modal.style.display = "block";
+	document.body.style.overflowY = "hidden";
+}
+
+function closeModal() {
+	modal.style.display = "none";
+	document.body.style.overflowY = "scroll";
+}
+
+floatingActionBtn.addEventListener("click", showModal);
+modalBarrier.addEventListener("click", closeModal);
+modalCloseBtn.addEventListener("click", closeModal);
+modalCancelBtn.addEventListener("click", closeModal);

@@ -97,8 +97,10 @@ input[type="text"] {
 	}
 }
 
-.modal {
-	.barrier {
+#modal {
+	display: none;
+
+	#barrier {
 		position: fixed;
 		top: 0;
 		left: 0;

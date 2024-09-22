@@ -14,7 +14,7 @@ import { DeleteIcon, EditIcon, ErrorIcon } from "../assets/icons.js";
 import { modal } from "../components/modal.js";
 import { tasksTb, headCells, tbHeadRow } from "../components/tasks.js";
 import * as style from "../styles/style.js";
-import { addUpdateTaskDialogBox } from "../components/add_task_dialog.js";
+import { addUpdateTaskDialogBox } from "../components/task_dialog.js";
 
 export const renderDialog = function () {
 	addUpdateTaskDialogBox.innerHTML = "";
