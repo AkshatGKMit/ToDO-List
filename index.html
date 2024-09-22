@@ -28,7 +28,80 @@
 		</button>
 		<div class="modal">
 			<div class="barrier"></div>
-			<div id="dialog-box"></div>
+			<div id="dialog-box">
+				<button type="button" id="close-dialog-btn">
+					<div class="slant-lines">
+						<div class="ltr"></div>
+						<div class="rtl"></div>
+					</div>
+				</button>
+				<div class="add-update-task">
+					<h2 class="dialog-heading">Add Task</h2>
+					<ul class="input-elements">
+						<li class="task-input-wrapper">
+							<label
+								>Task Name
+								<span class="required">*</span>
+							</label>
+							<input
+								type="text"
+								id="task-name-inp"
+								placeholder="Enter task name"
+							/>
+						</li>
+						<li class="task-input-wrapper">
+							<label
+								>Priority
+								<span class="required">*</span>
+							</label>
+							<select id="priority-select">
+								<option value="" class="priority-options" selected disabled>
+									--Select Priority--
+								</option>
+								<option value="high" class="priority-options">High</option>
+								<option value="medium" class="priority-options">Medium</option>
+								<option value="low" class="priority-options">Low</option>
+							</select>
+						</li>
+						<li class="task-input-wrapper">
+							<div class="deadline-labels">
+								<label>Deadline</label>
+								<input
+									type="checkbox"
+									id="task-deadline-checkbox-inp"
+									placeholder="Enter task deadline"
+								/>
+							</div>
+							<div class="deadline-inputs">
+								<input
+									type="date"
+									name=""
+									id="task-deadline-date-inp"
+									disabled
+								/>
+								<input
+									type="time"
+									name=""
+									id="task-deadline-time-inp"
+									disabled
+								/>
+							</div>
+						</li>
+						<li class="task-input-wrapper">
+							<label>Task Description</label>
+							<textarea
+								id="task-descroption-inp"
+								rows="5"
+								placeholder="Enter task description"
+							></textarea>
+						</li>
+					</ul>
+					<div class="dialog-btns">
+						<button type="button" id="cancel-btn">Cancel</button>
+						<button type="button" id="action-btn">Add</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<!-- <script type="module" src="data/data.js"></script>
