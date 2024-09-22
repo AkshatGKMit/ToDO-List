@@ -1,95 +1,35 @@
 import { sortList } from "../helpers/helpers.js";
 
 window.tasks = {
-	list: [
-		{
-			priority: 0,
-			status: "incomplete",
-			name: "Exercise",
-			deadline: false,
-			description: "00 min workout",
-		},
-		{
-			priority: 2,
-			status: "incomplete",
-			name: "Read Book",
-			deadline: false,
-			description: "Read 10 pages",
-		},
-		{
-			priority: 1,
-			status: "incomplete",
-			name: "Meditate",
-			deadline: false,
-			description: "10 min meditation",
-		},
-		{
-			priority: 0,
-			status: "incomplete",
-			name: "Clean Room",
-			deadline: false,
-			description: "Tidy up and vacuum",
-		},
-		{
-			priority: 2,
-			status: "incomplete",
-			name: "Call Mom",
-			deadline: false,
-			description: "Weekly call",
-		},
-		{
-			priority: 1,
-			status: "incomplete",
-			name: "Grocery Shopping",
-			deadline: false,
-			description: "Buy essentials",
-		},
-		{
-			priority: 0,
-			status: "incomplete",
-			name: "Laundry",
-			deadline: false,
-			description: "Wash, dry, fold",
-		},
-		{
-			priority: 2,
-			status: "incomplete",
-			name: "Meal Prep",
-			deadline: false,
-			description: "Cook for the week",
-		},
-		{
-			priority: 1,
-			status: "incomplete",
-			name: "Pay Bills",
-			deadline: false,
-			description: "Utilities, rent, etc.",
-		},
-		{
-			priority: 0,
-			status: "incomplete",
-			name: "Floss Teeth",
-			deadline: false,
-			description: "Daily flossing",
-		},
-	],
+	list: [],
 	getAll: function () {
 		return this.list;
 	},
+	loadAll: function () {
+		this.list = JSON.parse(localStorage.getItem("tasks")) ?? [];
+	},
+	save: function () {
+		localStorage.setItem("tasks", JSON.stringify(this.list));
+	},
 	add: function (newTask) {
 		this.list.push(newTask);
+		this.save();
 	},
 	update: function (task, idx) {
 		this.list[idx] = task;
+		this.save();
 	},
-    updateStatus: function (idx) {
+	updateStatus: function (idx) {
 		this.list[idx].status = window.data.status[1];
+		this.save();
 	},
 	delete: function (idx) {
 		this.list = this.list.filter((_, i) => i !== idx);
+		this.save();
 	},
 	sort: function (sortBy) {
 		sortList(sortBy);
+		this.save();
 	},
 	searchValue: "",
 	searchList: [],
